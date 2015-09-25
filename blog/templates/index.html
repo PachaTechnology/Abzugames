@@ -34,7 +34,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">
+                <a class="navbar-brand page-scroll" href="{% url 'app_blog:home'%}">
                     
                     <span class="light"><img src="{% static 'img/logo.png'%}"  height="25" width="25"></span> AbzuGames
                 </a>
@@ -54,7 +54,7 @@
                         <a class="page-scroll" href="#download">Contacto</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="login.html">Iniciar sesi&oacute;n</a>
+                        <a class="page-scroll" href="{% url 'app_blog:login'%}">Iniciar sesi&oacute;n</a>
                     </li>
                 </ul>
             </div>
