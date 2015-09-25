@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 
 <head>
@@ -12,16 +13,16 @@
     <title>AbzuGames</title>
 
     
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
     
     
-    <link href="css/grayscale.css" rel="stylesheet">
+    <link href="{% static 'css/grayscale.css'%}" rel="stylesheet">
 
     
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="{% static 'font-awesome/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link rel="icon" type="image/png" href="img/logo.png" />
+    <link rel="icon" type="image/png" href="{% static 'img/logo.png'%}" />
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -35,7 +36,7 @@
                 </button>
                 <a class="navbar-brand page-scroll" href="#page-top">
                     
-                    <span class="light"><img src="img/logo.png"  height="25" width="25"></span> AbzuGames
+                    <span class="light"><img src="{% static 'img/logo.png'%}"  height="25" width="25"></span> AbzuGames
                 </a>
             </div>
 
@@ -100,7 +101,7 @@
                             
                             </div>
                         </div>
-                        <img src="img/portfolio/cover6.png"  alt=""  height="470" width="360">
+                        <img src="{% static 'img/portfolio/cover6.png'%}"  alt=""  height="470" width="360">
                     </a>
                    
                 </div>
@@ -111,7 +112,7 @@
                                 <i class="fa fa-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="img/portfolio/cover5.png" height="470" width="360" alt="">
+                        <img src="{% static 'img/portfolio/cover5.png'%}" height="470" width="360" alt="">
                     </a>
                    
                 </div>
@@ -122,7 +123,7 @@
                                 <i class="fa fa-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="img/portfolio/cover4.png" height="470" width="360" alt="">
+                        <img src="{% static 'img/portfolio/cover4.png'%}" height="470" width="360" alt="">
                     </a>
                     
                 </div>
@@ -133,7 +134,7 @@
                                 <i class="fa fa-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="img/portfolio/cover2.png" height="470" width="360" alt="">
+                        <img src="{% static 'img/portfolio/cover2.png'%}" height="470" width="360" alt="">
                     </a>
                     
                 </div>
@@ -144,7 +145,7 @@
                                 <i class="fa fa-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="img/portfolio/cover3.png" height="470" width="360" alt="">
+                        <img src="{% static 'img/portfolio/cover3.png'%}" height="470" width="360" alt="">
                     </a>
                   
                 </div>
@@ -155,7 +156,7 @@
                                 <i class="fa fa-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="img/portfolio/cover1.png" height="470" width="360" alt="">
+                        <img src="{% static 'img/portfolio/cover1.png'%}" height="470" width="360" alt="">
                     </a>
                     
                 </div>
@@ -207,19 +208,16 @@
     </footer>
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="{% static 'js/jquery.js'%}"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="js/jquery.easing.min.js"></script>
-
-    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+    <script src="{% static 'js/jquery.easing.min.js'%}"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="js/grayscale.js"></script>
+    <script src="{% static 'js/grayscale.js'%}"></script>
 
 </body>
 
