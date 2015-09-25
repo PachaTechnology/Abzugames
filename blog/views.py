@@ -9,3 +9,7 @@ def home(request):
 def login(request):
     return render_to_response('login.html',
                               {})
+
+def registro(request):
+    return render_to_response('register.html',
+                              {})

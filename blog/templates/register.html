@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>AbzuGames</title>
+
+    
+    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}">
+    
+    
+    <link href="{% static 'css/grayscale.css'%}" rel="stylesheet">
+
+    
+    <link href="{% static 'font-awesome/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/png" href="{% static 'img/logo.png'%}"/>
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="{% url 'app_blog:home'%}">
+                    
+                    <span class="light"><img src="{% static 'img/logo.png'%}"  height="25" width="25"></span> AbzuGames
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#portfolio">Explorar Juego</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#download">Contacto</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="{% url 'app_blog:login'%}">Iniciar sesi&oacute;n</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Intro Header -->
+    <header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4"></div>
+                            <div class="col-md-4" id="login">
+                                <form class="form-signin" role="form">
+                                    <input id="txtName" type="text" class="form-control" placeholder="Nombre de usuario">
+                                    <input id="txtEmail" type="email" class="form-control" placeholder="Email">
+                                    <input type="password" class="form-control" placeholder="Contraseña">
+                                    <input type="password" class="form-control" placeholder="Repita contraseña">
+
+                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Registrate</button>
+                                </form>
+                            </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="download" class="content-section text-center">
+        <div class="download-section">
+            <div class="container">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h2>Contacto PachaTecnology</h2>
+                    <p>Feel free to email us to provide some feedback on our templates, give us suggestions for new templates and themes, or to just say hello!</p>
+                    <ul class="list-inline banner-social-buttons">
+                    <li>
+                        <a href="" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                    </li>
+                    <li>
+                        <a href="" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                    </li>
+                    <li>
+                        <a href="" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
+                    </li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- jQuery -->
+    <script src="{% static 'js/jquery.js'%}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{% static 'js/jquery.easing.min.js'%}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static 'js/grayscale.js'%}"></script>
+
+</body>
+
+</html>
