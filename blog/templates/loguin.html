@@ -1,3 +1,9 @@
+ 
+{% block content %}
+    {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+
+    {% endif %}
 <!DOCTYPE html>
 {% load staticfiles %}
 <html lang="en">
@@ -23,7 +29,7 @@
     <link href="{% static 'font-awesome/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link rel="icon" type="image/png" href="{% static 'img/logo.png'%}"/>
+    <link rel="icon" type="image/png" href="{% static 'img/logo.png'%}" />
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -49,13 +55,10 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#portfolio">Explorar Juego</a>
-                    </li>
-                    <li>
                         <a class="page-scroll" href="#download">Contacto</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="{% url 'app_blog:login'%}">Iniciar sesi&oacute;n</a>
+                        <a class="page-scroll" href="app_blog:signup.html">Registrarse</a>
                     </li>
                 </ul>
             </div>
@@ -63,32 +66,34 @@
         </div>
         <!-- /.container -->
     </nav>
-
-    <!-- Intro Header -->
-    <header class="intro">
+  <header class="intro">
         <div class="intro-body">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-4"></div>
                             <div class="col-md-4" id="login">
-                                <form class="form-signin" role="form">
-                                    <input id="txtName" type="text" class="form-control" placeholder="Nombre de usuario">
-                                    <input id="txtEmail" type="email" class="form-control" placeholder="Email">
-                                    <input type="password" class="form-control" placeholder="Contraseña">
-                                    <input type="password" class="form-control" placeholder="Repita contraseña">
-
-                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Registrate</button>
-                                </form>
+    <form  class="form-signin" role="form" method="post" action="{% url 'app_blog:django.contrib.auth.views.login' %}">
+        <div class="text-center">
+                <img id="avatar" src="{% static 'img/nadie.png'%}" alt="avatar">                    </div>
+        {% csrf_token %}
+        
+           
+                
+        <input placeholder="Usuario" class="form-control" id="id_username" maxlength="254" name="username" type="text">
+        <input placeholder="Contraseña" class="form-control" id="id_password" maxlength="254" name="password"  type="password">  
+        <input type="submit" class="btn btn-lg btn-primary btn-block" value="Log In"/> 
+    </form>
+     <a href="{% url 'app_blog:registro'%}">¿No tienes cuenta? ¡Registrate!</a>
+       <br></br>
                             </div>
                         <div class="col-md-4"></div>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
-
-    <section id="download" class="content-section text-center">
+    </header>                            
+   <section id="download" class="content-section text-center">
         <div class="download-section">
             <div class="container">
                 <div class="col-lg-8 col-lg-offset-2">
@@ -109,7 +114,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- jQuery -->
     <script src="{% static 'js/jquery.js'%}"></script>
 
@@ -125,3 +130,5 @@
 </body>
 
 </html>
+
+{% endblock %}

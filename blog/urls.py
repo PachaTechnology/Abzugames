@@ -1,6 +1,10 @@
 from django.conf.urls import patterns, include, url
+from django.contrib.auth.views import login, logout
 urlpatterns = patterns('',
-                       url(r'^$','blog.views.home', name='home'),
-                       url(r'^Login/$','blog.views.login', name='login'),
+                      url(r'^home/$','blog.views.home', name='home'),
+                       url(r'^$', 'blog.views.main', name='main'),
                        url(r'^Registro/$','blog.views.registro', name='registro'),
+                       url(r'^signup$', 'blog.views.signup', name='signup'),
+                       url(r'^login$', login, {'template_name': 'loguin.html', }, name="login"),
+                       url(r'^logout$', logout, {'template_name': 'main.html', }, name="logout"),
                       )
