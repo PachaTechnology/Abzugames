@@ -17,10 +17,6 @@ def home(request):
     context = RequestContext(request)
     return render_to_response('home.html',
                               context)
-
-def registro(request):
-    return render_to_response('register.html',
-                              {})
 def signup(request):
     if request.method == 'POST':  # If the form has been submitted...
         form = SignUpForm(request.POST)  # A form bound to the POST data
