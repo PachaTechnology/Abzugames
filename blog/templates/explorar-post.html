@@ -1,4 +1,7 @@
+
+{% block content %}
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 
     <head>
@@ -12,16 +15,16 @@
         <title>AbzuGames</title>
 
         <!-- Bootstrap Core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+         <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+    
+    
+    <link href="{% static 'css/grayscale.css'%}" rel="stylesheet">
 
-        <!-- Custom CSS -->
-        <link href="css/grayscale.css" rel="stylesheet">
-
-        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-        <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-        <link rel="icon" type="image/png" href="img/logo.png" />
-
+    
+    <link href="{% static 'font-awesome/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/png" href="{% static 'img/logo.png'%}" />
     </head>
 
     <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -35,9 +38,9 @@
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                             <i class="fa fa-bars"></i>
                         </button>
-                        <a class="navbar-brand page-scroll" href="index.html">
+                        <a class="navbar-brand page-scroll" href="{% url 'app_blog:home'%}">
 
-                            <span class="light"><img src="img/logo.png"  height="25" width="25"></span> AbzuGames
+                            <span class="light"><img src="{% static 'img/logo.png'%}"  height="25" width="25"></span> AbzuGames
                         </a>
                     </div>
 
@@ -55,7 +58,13 @@
                                 <a class="page-scroll" href="#download">Contacto</a>
                             </li>
                             <li>
-                                <a class="page-scroll" href="login.html">Cerrar sesi&oacute;n</a>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent; border-color: transparent; padding: 13px 11px;">{{ user.username }} <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                        </li>
+                                        <li><a class="page-scroll" href="{% url 'app_blog:logout'%}">Cerrar Sesion</a></li>
+                                    </ul>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -91,226 +100,228 @@
                                 <li><a href="#">ROL</a></li>
                                 <li><a href="#">FPS</a></li>
                                 </div>
-                            
-                             <div class="btn-group" style="margin-left: 8px;"> <a class="btn btn-default dropdown-toggle btn-select" data-toggle="dropdown" href="#">Puntuacion <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">9+</a></li>
-                            <li><a href="#">8+</a></li>
-                            <li><a href="#">7+</a></li>
-                            <li><a href="#">6+</a></li>
-                            <li><a href="#">5+</a></li>
-                            <li><a href="#">4+</a></li>
-                            <li><a href="#">3+</a></li>
-                            <li><a href="#">2+</a></li>
-                            <li><a href="#">1+</a></li>                            
-                    </div>
-                         
-                                   <div class="btn-group" style="margin-left: 8px;"> <a class="btn btn-default dropdown-toggle btn-select" data-toggle="dropdown" href="#">Ordenar por <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">AÑO</a></li>
-                                <li><a href="#">PUNTUACION</a></li>
-                                <li><a href="#">ORDEN ALFABETICO</a></li>
-                                <li><a href="#">ULTIMOS SUBIDOS</a></li>
-                                </div>
-                                 
-                            <div class="btn-group" style="margin-left: 8px;">
-                                <button type="button" id="btnSearch" class="btn btn-primary">Buscar</button>
-                            </div>
-                        </div>
-                        </form>
-                    <!-- Search box End -->
 
+                            <div class="btn-group" style="margin-left: 8px;"> <a class="btn btn-default dropdown-toggle btn-select" data-toggle="dropdown" href="#">Puntuacion <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">9+</a></li>
+                                    <li><a href="#">8+</a></li>
+                                    <li><a href="#">7+</a></li>
+                                    <li><a href="#">6+</a></li>
+                                    <li><a href="#">5+</a></li>
+                                    <li><a href="#">4+</a></li>
+                                    <li><a href="#">3+</a></li>
+                                    <li><a href="#">2+</a></li>
+                                    <li><a href="#">1+</a></li>                            
+                                    </div>
 
-                    <!-- Page Content -->
-                    <!-- Portfolio Grid Section -->
-                    <section id="portfolio" class="bg-light-gray">
-                        <div class="container">
+                                <div class="btn-group" style="margin-left: 8px;"> <a class="btn btn-default dropdown-toggle btn-select" data-toggle="dropdown" href="#">Ordenar por <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">AÑO</a></li>
+                                        <li><a href="#">PUNTUACION</a></li>
+                                        <li><a href="#">ORDEN ALFABETICO</a></li>
+                                        <li><a href="#">ULTIMOS SUBIDOS</a></li>
+                                        </div>
 
-                            <!-- Page Heading -->
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <h1 class="page-header">Page Heading
-                                        <small>Secondary Text</small>
-                                    </h1>
-                                </div>
-                            </div>
-                            <!-- /.row -->
-
-                            <!-- Project One -->
-                            <div class="row" style="margin-right:-15px; margin-left:-15px; margin-top:7px;">
-                                <div class="col-md-7">
-                                    <a href="#">
-                                        <img class="img-responsive" style="max-width: 50%;" src="img/portfolio/cover2.png" alt="">
-                                    </a>
-                                </div>
-                                <div class="col-md-5" style="margin-left:-295px; margin-top: 3px;">
-                                    <h3>Project One</h3>
-                                    <h4>Subheading</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
-                                    <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
-                                </div>
-                            </div>
-                            <!-- /.row -->
-
-                            <hr>
-
-                            <!-- Project Two -->
-                            <div class="row">
-                                <div class="col-md-7">
-                                    <a href="#">
-                                        <img class="img-responsive" src="http://placehold.it/700x300" alt="">
-                                    </a>
-                                </div>
-                                <div class="col-md-5">
-                                    <h3>Project Two</h3>
-                                    <h4>Subheading</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
-                                    <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
-                                </div>
-                            </div>
-                            <!-- /.row -->
-
-                            <hr>
-
-                            <!-- Project Three -->
-                            <div class="row">
-                                <div class="col-md-7">
-                                    <a href="#">
-                                        <img class="img-responsive" src="http://placehold.it/700x300" alt="">
-                                    </a>
-                                </div>
-                                <div class="col-md-5">
-                                    <h3>Project Three</h3>
-                                    <h4>Subheading</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, temporibus, dolores, at, praesentium ut unde repudiandae voluptatum sit ab debitis suscipit fugiat natus velit excepturi amet commodi deleniti alias possimus!</p>
-                                    <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
-                                </div>
-                            </div>
-                            <!-- /.row -->
-
-                            <hr>
-
-                            <!-- Project Four -->
-                            <div class="row">
-
-                                <div class="col-md-7">
-                                    <a href="#">
-                                        <img class="img-responsive" src="http://placehold.it/700x300" alt="">
-                                    </a>
-                                </div>
-                                <div class="col-md-5">
-                                    <h3>Project Four</h3>
-                                    <h4>Subheading</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, quidem, consectetur, officia rem officiis illum aliquam perspiciatis aspernatur quod modi hic nemo qui soluta aut eius fugit quam in suscipit?</p>
-                                    <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
-                                </div>
-                            </div>
-                            <!-- /.row -->
-
-                            <hr>
-
-                            <!-- Project Five -->
-                            <div class="row">
-                                <div class="col-md-7">
-                                    <a href="#">
-                                        <img class="img-responsive" src="http://placehold.it/700x300" alt="">
-                                    </a>
-                                </div>
-                                <div class="col-md-5">
-                                    <h3>Project Five</h3>
-                                    <h4>Subheading</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, quo, minima, inventore voluptatum saepe quos nostrum provident ex quisquam hic odio repellendus atque porro distinctio quae id laboriosam facilis dolorum.</p>
-                                    <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
-                                </div>
-                            </div>
-                            <!-- /.row -->
-
-                            <hr>
-
-                            <!-- Pagination -->
-                            <div class="row text-center">
-                                <div class="col-lg-12">
-                                    <ul class="pagination">
-                                        <li>
-                                            <a href="#">&laquo;</a>
-                                        </li>
-                                        <li class="active">
-                                            <a href="#">1</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">2</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">3</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">4</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">5</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">&raquo;</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- Blog Sidebar Widgets Column -->
-
-
-                            </div>
-                            <!-- /.row -->
-                            </section>
-
-                        <section id="download" class="content-section text-center">
-                            <div class="download-section">
-                                <div class="container">
-                                    <div class="col-lg-8 col-lg-offset-2">
-                                        <h2>Contacto PachaTecnology</h2>
-                                        <p>Feel free to email us to provide some feedback on our templates, give us suggestions for new templates and themes, or to just say hello!</p>
-                                        <ul class="list-inline banner-social-buttons">
-                                            <li>
-                                                <a href="" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
-                                            </li>
-                                        </ul>
+                                    <div class="btn-group" style="margin-left: 8px;">
+                                        <button type="button" id="btnSearch" class="btn btn-primary">Buscar</button>
                                     </div>
                                 </div>
-                            </div>
-                        </section>
+                                </form>
+                            <!-- Search box End -->
+
+
+                            <!-- Page Content -->
+                            <!-- Portfolio Grid Section -->
+                            <section id="portfolio" class="bg-light-gray">
+                                <div class="container">
+
+                                    <!-- Page Heading -->
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <h1 class="page-header">Page Heading
+                                                <small>Secondary Text</small>
+                                            </h1>
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+
+                                    <!-- Project One -->
+                                    <div class="row" style="margin-right:-15px; margin-left:-15px; margin-top:7px;">
+                                        <div class="col-md-7">
+                                            <a href="#">
+                                                <img class="img-responsive" style="max-width: 50%;" src="{% static 'img/portfolio/cover2.png'%}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="col-md-5" style="margin-left:-295px; margin-top: 3px;">
+                                            <h3>Project One</h3>
+                                            <h4>Subheading</h4>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
+                                            <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+
+                                    <hr>
+
+                                    <!-- Project Two -->
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <a href="#">
+                                                <img class="img-responsive" src="http://placehold.it/700x300" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <h3>Project Two</h3>
+                                            <h4>Subheading</h4>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
+                                            <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+
+                                    <hr>
+
+                                    <!-- Project Three -->
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <a href="#">
+                                                <img class="img-responsive" src="http://placehold.it/700x300" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <h3>Project Three</h3>
+                                            <h4>Subheading</h4>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, temporibus, dolores, at, praesentium ut unde repudiandae voluptatum sit ab debitis suscipit fugiat natus velit excepturi amet commodi deleniti alias possimus!</p>
+                                            <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+
+                                    <hr>
+
+                                    <!-- Project Four -->
+                                    <div class="row">
+
+                                        <div class="col-md-7">
+                                            <a href="#">
+                                                <img class="img-responsive" src="http://placehold.it/700x300" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <h3>Project Four</h3>
+                                            <h4>Subheading</h4>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, quidem, consectetur, officia rem officiis illum aliquam perspiciatis aspernatur quod modi hic nemo qui soluta aut eius fugit quam in suscipit?</p>
+                                            <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+
+                                    <hr>
+
+                                    <!-- Project Five -->
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <a href="#">
+                                                <img class="img-responsive" src="http://placehold.it/700x300" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <h3>Project Five</h3>
+                                            <h4>Subheading</h4>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, quo, minima, inventore voluptatum saepe quos nostrum provident ex quisquam hic odio repellendus atque porro distinctio quae id laboriosam facilis dolorum.</p>
+                                            <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+
+                                    <hr>
+
+                                    <!-- Pagination -->
+                                    <div class="row text-center">
+                                        <div class="col-lg-12">
+                                            <ul class="pagination">
+                                                <li>
+                                                    <a href="#">&laquo;</a>
+                                                </li>
+                                                <li class="active">
+                                                    <a href="#">1</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">2</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">3</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">4</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">5</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">&raquo;</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- Blog Sidebar Widgets Column -->
+
+
+                                    </div>
+                                    <!-- /.row -->
+                                    </section>
+
+                                <section id="download" class="content-section text-center">
+                                    <div class="download-section">
+                                        <div class="container">
+                                            <div class="col-lg-8 col-lg-offset-2">
+                                                <h2>Contacto PachaTecnology</h2>
+                                                <p>Feel free to email us to provide some feedback on our templates, give us suggestions for new templates and themes, or to just say hello!</p>
+                                                <ul class="list-inline banner-social-buttons">
+                                                    <li>
+                                                        <a href="" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
 
 
 
-                        <hr>
+                                <hr>
 
-                        <!-- Footer -->
-                        <footer>
-                            <div class="container text-center">
-                                <p>Copyright &copy; Our Website 2015</p>
-                            </div>
-                        </footer>
-
-
-                        </div>
-                    <!-- /.container -->
-
-                    <!-- jQuery -->
-                    <script src="js/jquery.js"></script>
-
-                    <!-- Bootstrap Core JavaScript -->
-                    <script src="js/bootstrap.min.js"></script>
-
-                    <!-- Plugin JavaScript -->
-                    <script src="js/jquery.easing.min.js"></script>
-
-                    <!-- Custom Theme JavaScript -->
-                    <script src="js/grayscale.js"></script>
+                                <!-- Footer -->
+                                <footer>
+                                    <div class="container text-center">
+                                        <p>Copyright &copy; Our Website 2015</p>
+                                    </div>
+                                </footer>
 
 
-                    </body>
+                                </div>
+                            <!-- /.container -->
 
-                </html>
+    <!-- jQuery -->
+    <script src="{% static 'js/jquery.js'%}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{% static 'js/jquery.easing.min.js'%}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static 'js/grayscale.js'%}"></script>
+
+
+                            </body>
+
+                        </html>
+
+                    {% endblock %}
