@@ -10,13 +10,19 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from forms import SignUpForm
 # Create your views here.
-def main(request):
-    return render_to_response('main.html', {}, context_instance=RequestContext(request))
-@login_required()
+
+#def main(request):
+ #   return render_to_response('main.html', {}, context_instance=RequestContext(request))
+
 def home(request):
     context = RequestContext(request)
     return render_to_response('home.html',
                               context)
+
+def explorarpost(request):
+    context = RequestContext(request)
+    return render_to_response('explorar-post.html',  context)
+
 def signup(request):
     if request.method == 'POST':  # If the form has been submitted...
         form = SignUpForm(request.POST)  # A form bound to the POST data
@@ -32,7 +38,7 @@ def signup(request):
             user.last_name = last_name
             user.save()
  
-            return HttpResponseRedirect(reverse('app_blog:main'))  # Redirect after POST
+            return HttpResponseRedirect(reverse('app_blog:home'))  # Redirect after POST
     else:
         form = SignUpForm()
  
