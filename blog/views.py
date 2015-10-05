@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from forms import SignUpForm
+from .forms import PostForm
 # Create your views here.
 def main(request):
     return render_to_response('main.html', {}, context_instance=RequestContext(request))
@@ -40,3 +41,7 @@ def signup(request):
         'form': form,
     }
     return render_to_response('signup.html', data, context_instance=RequestContext(request))
+
+def newpost(request):
+        form = PostForm()
+        return render(request, 'crear-post.html', {'form': form})
