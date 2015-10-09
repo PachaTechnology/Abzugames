@@ -9,4 +9,5 @@ urlpatterns = patterns('',
                        url(r'^signup$', 'blog.views.signup', name='signup'),
                        url(r'^login$', login, {'template_name': 'loguin.html', }, name="login"),
                        url(r'^logout$', logout, {'template_name': 'loguin.html', }, name="logout"),
+                       url(r'^crear-post$', 'blog.views.newpost', name='newpost'),
                       )
