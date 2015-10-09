@@ -8,7 +8,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from forms import SignUpForm
+from forms import SignUpForm 
 # Create your views here.
 
 #def main(request):
@@ -29,7 +29,8 @@ def signup(request):
         if form.is_valid():  # All validation rules pass
 
             username = form.cleaned_data["username"]
-            password = form.cleaned_data["password"]
+            password = form.cleaned_data["password1"]
+            password2 = form.cleaned_data["password2"]
             email = form.cleaned_data["email"]
             first_name = form.cleaned_data["first_name"]
             last_name = form.cleaned_data["last_name"]
@@ -37,7 +38,9 @@ def signup(request):
             user.first_name = first_name
             user.last_name = last_name
             user.save()
- 
+            new_user = authenticate(username=request.POST['username'],
+                                    password=request.POST['password1'])
+            login(request, new_user)
             return HttpResponseRedirect(reverse('app_blog:home'))  # Redirect after POST
     else:
         form = SignUpForm()
@@ -46,3 +49,4 @@ def signup(request):
         'form': form,
     }
     return render_to_response('signup.html', data, context_instance=RequestContext(request))
+

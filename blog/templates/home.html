@@ -90,7 +90,7 @@
                     </li>
         
                     <li>
-                        
+                        {% if user.is_authenticated %}
                 <div class="dropdown">
                   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent; border-color: transparent; padding: 13px 11px;">{{ user.username }}
                   <span class="caret"></span></button>
@@ -98,6 +98,7 @@
                     <li><a class="page-scroll" href="{% url 'app_blog:logout'%}">Cerrar Sesion</a></li>
                   </ul>
                 </div>
+                        {% endif %}
                     </li>
                 </ul>
             </div>
