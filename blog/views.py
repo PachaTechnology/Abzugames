@@ -8,13 +8,17 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+<<<<<<< HEAD
 from forms import SignUpForm 
 from forms import SignUpForm
 from .forms import PostForm
 # Create your views here.
+=======
+from forms import SignUpForm
+from forms import PostForm
+>>>>>>> 52c9beb1e0112d2b7b21eb828aed90335f547f7e
 
-#def main(request):
- #   return render_to_response('main.html', {}, context_instance=RequestContext(request))
+# Create your views here.
 
 def home(request):
     context = RequestContext(request)
@@ -52,7 +56,14 @@ def signup(request):
     }
     return render_to_response('signup.html', data, context_instance=RequestContext(request))
 
+<<<<<<< HEAD
 def newpost(request):
         form = PostForm()
         return render(request, 'crear-post.html', {'form': form})
 
+=======
+
+def newpost(request):
+        form = PostForm()
+        return render(request, 'crear-post.html', {'form': form})
+>>>>>>> 52c9beb1e0112d2b7b21eb828aed90335f547f7e
