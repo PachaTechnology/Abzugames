@@ -8,16 +8,8 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-<<<<<<< HEAD
 from forms import SignUpForm 
-from forms import SignUpForm
 from .forms import PostForm
-# Create your views here.
-=======
-from forms import SignUpForm
-from forms import PostForm
->>>>>>> 52c9beb1e0112d2b7b21eb828aed90335f547f7e
-
 # Create your views here.
 
 def home(request):
@@ -25,8 +17,7 @@ def home(request):
     return render_to_response('home.html',context)
 
 def explorarpost(request):
-    context = RequestContext(request)}
-    resumen = str (models.Juego.contenido)[0:120]
+    context = RequestContext(request)
     return render_to_response('explorar-post.html',  context)
 
 def signup(request):
@@ -35,8 +26,7 @@ def signup(request):
         if form.is_valid():  # All validation rules pass
 
             username = form.cleaned_data["username"]
-            password = form.cleaned_data["password1"]
-            password2 = form.cleaned_data["password2"]
+            password = form.cleaned_data["password"]
             email = form.cleaned_data["email"]
             first_name = form.cleaned_data["first_name"]
             last_name = form.cleaned_data["last_name"]
@@ -45,7 +35,7 @@ def signup(request):
             user.last_name = last_name
             user.save()
             new_user = authenticate(username=request.POST['username'],
-                                    password=request.POST['password1'])
+                                    password=request.POST['password'])
             login(request, new_user)
             return HttpResponseRedirect(reverse('app_blog:home'))  # Redirect after POST
     else:
@@ -56,14 +46,7 @@ def signup(request):
     }
     return render_to_response('signup.html', data, context_instance=RequestContext(request))
 
-<<<<<<< HEAD
 def newpost(request):
         form = PostForm()
         return render(request, 'crear-post.html', {'form': form})
 
-=======
-
-def newpost(request):
-        form = PostForm()
-        return render(request, 'crear-post.html', {'form': form})
->>>>>>> 52c9beb1e0112d2b7b21eb828aed90335f547f7e

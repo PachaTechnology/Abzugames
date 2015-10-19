@@ -82,6 +82,11 @@
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
+                    {% if user.is_anonymous %}
+                    <li>
+                        <a class="page-scroll" href="{% url 'app_blog:login'%}">Iniciar Sesion</a>
+                    </li>
+                    {% endif %}
                     <li>
                         <a class="page-scroll" href="{% url 'app_blog:explorar-post'%}">Explorar Juego</a>
                     </li>
@@ -95,6 +100,7 @@
                   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent; border-color: transparent; padding: 13px 11px;">{{ user.username }}
                   <span class="caret"></span></button>
                   <ul class="dropdown-menu">
+                    <li><a class="page-scroll" href="{% url 'app_blog:newpost'%}">Crear Post</a></li>  
                     <li><a class="page-scroll" href="{% url 'app_blog:logout'%}">Cerrar Sesion</a></li>
                   </ul>
                 </div>
