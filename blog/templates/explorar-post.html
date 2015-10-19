@@ -95,46 +95,46 @@
         <div class="carousel-search hidden-sm" style="margin-left: 320px; margin-top: 2px;">
             <div class="btn-group" style="margin-left: 8px;"> <a class="btn btn-default dropdown-toggle btn-select" data-toggle="dropdown" href="#">Plataforma <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">TODAS</a></li>
-                    <li><a href="#">PC</a></li>
-                    <li><a href="#">PS3</a></li>
-                    <li><a href="#">PS4</a></li>
-                    <li><a href="#">XBOX 360</a></li>
-                    <li><a href="#">XBOX ONE</a></li>
+                    <li><a href="#">TODAS </a></li>
+                    <li><a href="#">PC </a></li>
+                    <li><a href="#">PS3 </a></li>
+                    <li><a href="#">PS4 </a></li>
+                    <li><a href="#">XBOX 360 </a></li>
+                    <li><a href="#">XBOX ONE </a></li>
                     </div>
 
                 <div class="btn-group" style="margin-left: 8px;"> <a class="btn btn-default dropdown-toggle btn-select" data-toggle="dropdown" href="#">Categoria <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">ACCION</a></li>
-                        <li><a href="#">AVENTURAS</a></li>
-                        <li><a href="#">CONDUCCION</a></li>
-                        <li><a href="#">DEPORTES</a></li>
-                        <li><a href="#">ROL</a></li>
-                        <li><a href="#">SHOOTER</a></li>
-                        <li><a href="#">ESTRATEGIA</a></li>
-                        <li><a href="#">SIMULADORES</a></li>
-                        <li><a href="#">OTROS</a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#">AVENTURAS </a></li>
+                        <li><a href="#">CONDUCCION </a></li>
+                        <li><a href="#">DEPORTES </a></li>
+                        <li><a href="#">ROL </a></li>
+                        <li><a href="#">SHOOTER </a></li>
+                        <li><a href="#">ESTRATEGIA </a></li>
+                        <li><a href="#">SIMULADORES </a></li>
+                        <li><a href="#">OTROS </a></li>
                         </div>
 
                     <div class="btn-group" style="margin-left: 8px;"> <a class="btn btn-default dropdown-toggle btn-select" data-toggle="dropdown" href="#">Puntuacion <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">9+</a></li>
-                            <li><a href="#">8+</a></li>
-                            <li><a href="#">7+</a></li>
-                            <li><a href="#">6+</a></li>
-                            <li><a href="#">5+</a></li>
-                            <li><a href="#">4+</a></li>
-                            <li><a href="#">3+</a></li>
-                            <li><a href="#">2+</a></li>
-                            <li><a href="#">1+</a></li>                            
+                            <li><a href="#">9+ </a></li>
+                            <li><a href="#">8+ </a></li>
+                            <li><a href="#">7+ </a></li>
+                            <li><a href="#">6+ </a></li>
+                            <li><a href="#">5+ </a></li>
+                            <li><a href="#">4+ </a></li>
+                            <li><a href="#">3+ </a></li>
+                            <li><a href="#">2+ </a></li>
+                            <li><a href="#">1+ </a></li>                            
                             </div>
 
                         <div class="btn-group" style="margin-left: 8px;"> <a class="btn btn-default dropdown-toggle btn-select" data-toggle="dropdown" href="#">Ordenar por <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">AÑO</a></li>
-                                <li><a href="#">PUNTUACION</a></li>
-                                <li><a href="#">ORDEN ALFABETICO</a></li>
-                                <li><a href="#">ULTIMOS SUBIDOS</a></li>
+                                <li><a href="#">AÑO </a></li>
+                                <li><a href="#">PUNTUACION </a></li>
+                                <li><a href="#">ORDEN ALFABETICO </a></li>
+                                <li><a href="#">ULTIMOS SUBIDOS </a></li>
                                 </div>
 
                             <div class="btn-group" style="margin-left: 8px;">
@@ -142,6 +142,7 @@
                             </div>
                         </div>
                         </form>
+                    
                     <!-- Search box End -->
 
 
@@ -334,7 +335,15 @@
                     <!-- Custom Theme JavaScript -->
                     <script src="{% static 'js/grayscale.js'%}"></script>
 
-
+                    <script>
+                        $(".dropdown-menu li a").click(function(){
+                        var selText = $(this).text();
+                        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+'<span class="caret"></span>');
+});
+                    $("#btnSearch").click(function(){
+	                alert($('.btn-select').text()+", "+$('.btn-select2').text());
+});
+                    </script>
                     </body>
 
                 </html>
