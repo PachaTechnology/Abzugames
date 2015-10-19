@@ -158,7 +158,7 @@
 
             <div class="form-group" style="margin-left: 1px; margin-top: 28px;">
                 <label class="col-sm-2 control-label" for="exampleInputFile">Insertar Imagen</label>
-                <input type="file" name="Imagen">
+                <input type="file" id="exampleInputFile">
             </div>
 
 
