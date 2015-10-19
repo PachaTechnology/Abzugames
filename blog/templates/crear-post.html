@@ -1,24 +1,320 @@
+
+{% block content %}
+<!DOCTYPE html>
 {% load staticfiles %}
-<html>
+<html lang="en">
+
     <head>
-        <title>Django Girls blog</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>AbzuGames</title>
+
+
+        <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+
+
+        <link href="{% static 'css/grayscale.css'%}" rel="stylesheet">
+
+
+        <link href="{% static 'font-awesome/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+        <link rel="icon" type="image/png" href="{% static 'img/logo.png'%}" />
     </head>
-    <body>
-        <div class="page-header">
-            <a href="{% url 'app_blog:newpost' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-            <h1><a href="/">Django Girls Blog</a></h1>
-        </div>
-        <div class="content container">
-            <div class="row">
-                <div class="col-md-8">
-                    {% block content %}
-                    {% endblock %}
+
+    <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+        <!--  <table>
+<tr>
+<td>{{ user.username.label_tag }}</td>
+<td>{{ user.username }}</td>
+</tr>
+
+<tr>
+<td>{{ user.email.label_tag }}</td>
+<td>{{ user.email }}</td>
+</tr>
+
+<tr>
+<td>{{ user.first_name.label_tag }}</td>
+<td>{{ user.first_name }}</td>
+</tr>
+
+<tr>
+<td>{{ user.last_name.label_tag }}</td>
+<td>{{ user.last_name }}</td>
+</tr>
+
+<tr>
+<td>{{ user.date_joined.label_tag }}</td>
+<td>{{ user.date_joined }}</td>
+</tr>
+
+<tr>
+<td>{{ user.last_login.label_tag }}</td>
+<td>{{ user.last_login }}</td>
+</tr>
+
+</table>
+-->
+        <!-- Navigation -->
+        <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <a class="navbar-brand page-scroll" href="{% url 'app_blog:home'%}">
+
+                        <span class="light"><img src="{% static 'img/logo.png'%}"  height="25" width="25" ></span> AbzuGames
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                    <ul class="nav navbar-nav">
+                        <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                        <li class="hidden">
+                            <a href="#page-top"></a>
+                        </li>
+                        {% if user.is_anonymous %}
+                        <li>
+                            <a class="page-scroll" href="{% url 'app_blog:login'%}">Iniciar Sesion</a>
+                        </li>
+                        {% endif %}
+                        <li>
+                            <a class="page-scroll" href="{% url 'app_blog:explorar-post'%}">Explorar Juego</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#download">Contacto</a>
+                        </li>
+
+                        <li>
+                            {% if user.is_authenticated %}
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent; border-color: transparent; padding: 13px 11px;">{{ user.username }}
+                                    <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="page-scroll" href="{% url 'app_blog:logout'%}">Cerrar Sesion</a></li>
+                                </ul>
+                            </div>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+
+
+        <form class="form-horizontal" role="form" method="post" action="index.php" style="margin-top: 160px; margin-left: 4px; margin-right: 133px; margin-bottom: -138px;">
+
+            <div style="margin-left: 61px; margin-bottom: 67px;">
+                <h1 class="page-header">
+                    Crear Post
+                    <small>AbzuGames</small>
+                </h1>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Titulo</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Titulo del Juego" value="">
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Contenido</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" rows="4" name="contenido" placeholder="Descripcion del Juego"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Trailer</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Insertar URL (YouTube)" value="">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Año</label>
+                <div class="col-sm-10" style="width: 160px;">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Año del Juego">
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-left: 1px; margin-top: 28px;">
+                <label class="col-sm-2 control-label" for="exampleInputFile">Insertar Imagen</label>
+                <input type="file" id="exampleInputFile">
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <! Will be used to display an alert to the user>
+                </div>
+            </div>
+
+            <div style="margin-top: -9px; margin-left: 1px;">
+                <label class="col-sm-2 control-label" for="exampleInputFile">Elegir Categoria</label>
+                <div style="margin-left: 207px;"> 
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Acción
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Aventuras
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Conducción
+                        </label>
+                    </div>
+
+                </div>
+
+                <div>
+
+
+                </div>
+                <div style="margin-left: 351px; margin-top: -81px;">
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Deportes
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Estrategia
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Rol
+                        </label>
+                    </div>
+
+                </div>
+
+                <div style="margin-left: 482px; margin-top: -80px;">
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Shooter
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Simuladores
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Otros
+                        </label>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2" style="margin-top: -35px; margin-left: 1083px;">
+                    <input id="submit" name="submit" type="submit" value="Postear" class="btn btn-primary" style="width: 127px;">
+                </div>
+            </div>
+
+        </form>
+
+
+
+
+        <!-- Download Section -->
+        <section id="download" class="content-section text-center">
+            <div class="download-section">
+                <div class="container">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <h2>Contacto PachaTecnology</h2>
+                        <p>Feel free to email us to provide some feedback on our templates, give us suggestions for new templates and themes, or to just say hello!</p>
+                        <ul class="list-inline banner-social-buttons">
+                            <li>
+                                <a href="" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                            </li>
+                            <li>
+                                <a href="" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                            </li>
+                            <li>
+                                <a href="" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="container content-section text-center">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h2></h2>
+                    <p></p>
+                    </p>
+
+            </div>
+            </div>
+        </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>Copyright &copy; Our Website 2015</p>
         </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="{% static 'js/jquery.js'%}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{% static 'js/jquery.easing.min.js'%}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static 'js/grayscale.js'%}"></script>
+
     </body>
+
 </html>
+
+
+
+
+{% endblock %}
