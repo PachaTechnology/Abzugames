@@ -15,6 +15,6 @@ class SignUpForm(ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Juego
-        fields = ('titulo', 'contenido', 'imagen', 'categoria','url')
+        fields = ('titulo', 'contenido', 'imagen', 'categoria', 'url', 'fechaCreacion', 'desarrollador')
 
 

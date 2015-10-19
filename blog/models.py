@@ -14,17 +14,19 @@ class Juego(models.Model):
     class Meta:
         verbose_name = "Juego"
         verbose_name_plural = "Juegos"
-        ordering=['-fecha']
+        ordering=['-fechaDelPost']
 
     imagen = models.FileField(u'Caratula de Juego', upload_to='imagendeljuego', default='null')
     titulo = models.CharField(u'Título', max_length=100)
-    fecha = models.DateTimeField(u'Fecha del Post',auto_now_add=True)
+    fechaDelPost     = models.DateTimeField(u'Fecha del Post',auto_now_add=True)
     contenido = models.TextField(u'Contenido')
     publicado = models.BooleanField(u'Publicado', default=True)
     autor = models.ForeignKey(User)
     categoria = models.ManyToManyField(Categoria)
     url = models.CharField(u'Link del Trailer', max_length=200)
-
+    fechaCreacion = models.IntegerField(u'Año de Creacion')
+    desarrollador = models.TextField(u'Desarrollador')    
+    
     def __str__(self):
         return self.titulo
 
