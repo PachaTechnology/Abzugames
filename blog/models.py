@@ -17,8 +17,8 @@ class Juego(models.Model):
         ordering=['-fechaDelPost']
 
     imagen = models.FileField(u'Caratula de Juego', upload_to='imagendeljuego', default='null')
-    titulo = models.CharField(u'Título', max_length=100)
-    fechaDelPost     = models.DateTimeField(u'Fecha del Post',auto_now_add=True)
+    titulo = models.CharField(u'Título', max_length=50)
+    fechaDelPost = models.DateTimeField(u'Fecha del Post', auto_now_add=True)
     contenido = models.TextField(u'Contenido')
     publicado = models.BooleanField(u'Publicado', default=True)
     autor = models.ForeignKey(User)

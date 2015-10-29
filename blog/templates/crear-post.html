@@ -29,39 +29,6 @@
 
     <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
-        <!--  <table>
-<tr>
-<td>{{ user.username.label_tag }}</td>
-<td>{{ user.username }}</td>
-</tr>
-
-<tr>
-<td>{{ user.email.label_tag }}</td>
-<td>{{ user.email }}</td>
-</tr>
-
-<tr>
-<td>{{ user.first_name.label_tag }}</td>
-<td>{{ user.first_name }}</td>
-</tr>
-
-<tr>
-<td>{{ user.last_name.label_tag }}</td>
-<td>{{ user.last_name }}</td>
-</tr>
-
-<tr>
-<td>{{ user.date_joined.label_tag }}</td>
-<td>{{ user.date_joined }}</td>
-</tr>
-
-<tr>
-<td>{{ user.last_login.label_tag }}</td>
-<td>{{ user.last_login }}</td>
-</tr>
-
-</table>
--->
         <!-- Navigation -->
         <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
             <div class="container">
@@ -111,84 +78,42 @@
             </div>
             <!-- /.container -->
         </nav>
-
-
-        <form class="formulario" role="form" method="POST" action="index.php" style="margin-top: 160px; margin-left: 4px; margin-right: 133px; margin-bottom: -138px;">
-
+        
+        <form  method="POST" role="form" class="form-signin" action="{% url 'app_blog:crear_juego'%}" style="margin-top: 103px;" enctype="multipart/form-data">
+{% csrf_token %}
             <div style="margin-left: 61px; margin-bottom: 67px;">
                 <h1 class="page-header">
                     Crear Post
                     <small>AbzuGames</small>
                 </h1>
             </div>
+                <div style="width: 422px; margin-left: 112px; margin-top: -46px;">
+                    <span>User: </span><span name="username" value="{{ user.username }}">{{ user.username }}</span>
+                    <input type="text" class="form-control" name="titulo" placeholder="Titulo del Juego" value="" style="margin-top: 16px; width: 241px;">
+                    <textarea type="text" class="form-control" rows="4" name="contenido" placeholder="Descripcion del Juego" style="margin-top: 14px;"></textarea>
+                    <input type="text" class="form-control" name="url" placeholder="Insertar URL (YouTube)" value="" style="margin-top: 7px;">
+                    <input type="int" class="form-control" name="fechaCreacion" placeholder="Año del Juego" style="margin-top: 7px;">
+                    <input type="text" class="form-control" name="desarrollador" placeholder="Desarrollador" style="margin-top: 7px;">
+                    <input type="file" id="imagen" name="imagen" style="margin-top: 7px;">
 
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Titulo</label>
-                <div class="col-sm-10">
-                    <input type="text" class="campo1" name="Titulo" placeholder="Titulo del Juego" value="">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Contenido</label>
-                <div class="col-sm-10">
-                    <textarea class="campo2" rows="4" name="contenido" placeholder="Descripcion del Juego"></textarea>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Trailer</label>
-                <div class="col-sm-10">
-                    <input type="text" class="campo3" name="urlTrailer" placeholder="Insertar URL (YouTube)" value="">
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Año</label>
-                <div class="col-sm-10" style="width: 200px;">
-                    <input type="int" class="campo4" name="Año" placeholder="Año del Juego">
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Desarrolladores</label>
-                <div class="col-sm-10" style="width: 200px;">
-                    <input type="text" class="campo5" name="Desarrolladores" placeholder="Desarrollador">
-                </div>
-            </div>
-
-            <div class="form-group" style="margin-left: 1px; margin-top: 28px;">
-                <label class="col-sm-2 control-label" for="exampleInputFile">Insertar Imagen</label>
-                <input type="file" name="Imagen">
-            </div>
-
-
-
-            <div class="form-group">
-                <div class="col-sm-10 col-sm-offset-2">
-                    <! Will be used to display an alert to the user>
-                </div>
-            </div>
-
-            <div style="margin-top: -9px; margin-left: 1px;">
-                <label class="col-sm-2 control-label" for="exampleInputFile">Elegir Categoria</label>
-                <div style="margin-left: 207px;"> 
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" value="">
+            
+                            <input type="checkbox" name="categorias[]" value="1">
                             Acción
-                        </label>
+                      </label>
                     </div>
 
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" value="">
+                            <input type="checkbox" name="categorias[]"value="2">
                             Aventuras
                         </label>
                     </div>
 
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" value="">
+                            <input type="checkbox" name="categorias[]"value="3">
                             Conducción
                         </label>
                     </div>
@@ -251,12 +176,11 @@
 
             </div>
 
-            <div class="form-group">
-                <div class="col-sm-10 col-sm-offset-2" style="margin-top: -35px; margin-left: 1083px;">
-                    <input id="submit" name="submit" type="submit" value="Postear" class="btn btn-primary" style="width: 127px;">
-                </div>
-            </div>
-
+<!--<a id="boton" type="submit" class="btn btn-lg btn-primary btn-block">Crear Post</a>-->
+<input type="submit" class="btn btn-lg btn-primary btn-block" value="Crear Post " style="width: 13%; margin-left: 874px;"/> 
+<!--<button type="submit" class="btn btn-lg btn-primary btn-block" value="Crear Post" style="width: 127px;"></button>-->
+<!--                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Crear Post" style="width: 127px;"/>-->
+           </div>
         </form>
 
 
@@ -316,7 +240,9 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="{% static 'js/grayscale.js'%}"></script>
-
+    <script>
+//        $("#boton").click(alert("pato"));
+    </script>
     </body>
 
 </html>

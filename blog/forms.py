@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from models import Juego, User
+from models import User
  
 class SignUpForm(ModelForm):
    
@@ -9,12 +9,9 @@ class SignUpForm(ModelForm):
         model = User
         fields = ['username', 'password' , 'email' , 'first_name', 'last_name']
         widgets = {
-
             'password': forms.PasswordInput(),
         }
-class PostForm(forms.ModelForm):
-    class Meta:
-        model = Juego
-        fields = ('titulo', 'contenido', 'imagen', 'categoria', 'url', 'fechaCreacion', 'desarrollador')
+        
+
 
 

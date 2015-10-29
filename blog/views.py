@@ -2,6 +2,7 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, render, redirect
+from django.views.decorators.csrf import requires_csrf_token
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
@@ -9,7 +10,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from forms import SignUpForm 
-from .forms import PostForm
+from blog.models import Juego , Categoria
+
+
 # Create your views here.
 
 def home(request):
@@ -46,7 +49,24 @@ def signup(request):
     }
     return render_to_response('signup.html', data, context_instance=RequestContext(request))
 
-def newpost(request):
-        form = PostForm()
-        return render(request, 'crear-post.html', {'form': form})
-
+@requires_csrf_token
+def crear_juego(request):
+    context = RequestContext(request)
+    if request.method=='POST':
+        print("POSTTTT")
+        print(request.user.id)
+        print(request.POST.getlist(Categoria))
+        game=Juego()
+        game.titulo=request.POST['titulo']
+        game.imagen=request.FILES['imagen']
+        game.contenido=request.POST['contenido']
+        game.url=request.POST['url']
+        game.categoria=request.POST.getlist('categorias')
+        game.desarrollador=request.POST['desarrollador']
+        game.fechaCreacion=request.POST['fechaCreacion']
+        game.autor = User.objects.get(id = request.user.id)
+        game.save()
+    else:
+        print("NO POST")
+    
+    return render_to_response('crear-post.html',  context)    
