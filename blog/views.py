@@ -61,7 +61,7 @@ def crear_juego(request):
         game.imagen=request.FILES['imagen']
         game.contenido=request.POST['contenido']
         game.url=request.POST['url']
-        game.categoria=request.POST.getlist('categorias')
+        #game.categoria=request.POST.getlist('categorias')
         game.desarrollador=request.POST['desarrollador']
         game.fechaCreacion=request.POST['fechaCreacion']
         game.autor = User.objects.get(id = request.user.id)
@@ -69,4 +69,7 @@ def crear_juego(request):
     else:
         print("NO POST")
     
-    return render_to_response('crear-post.html',  context)    
+    return render_to_response('crear-post.html',  context)
+def ver_post(request):
+    context = RequestContext(request)
+    return render_to_response('AbzuGames.html',  context)

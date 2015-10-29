@@ -22,7 +22,7 @@ class Juego(models.Model):
     contenido = models.TextField(u'Contenido')
     publicado = models.BooleanField(u'Publicado', default=True)
     autor = models.ForeignKey(User)
-    categoria = models.ManyToManyField(Categoria)
+    #categoria = models.ManyToManyField(Categoria)
     url = models.CharField(u'Link del Trailer', max_length=200)
     fechaCreacion = models.IntegerField(u'Año de Creacion')
     desarrollador = models.TextField(u'Desarrollador')    
