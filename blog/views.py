@@ -21,7 +21,10 @@ def home(request):
 
 def explorarpost(request):
     context = RequestContext(request)
-    return render_to_response('explorar-post.html',  context)
+    posts = Juego.objects.filter(publicado = True)
+    return render_to_response('explorar-post.html',
+{'posts':posts},
+context)
 
 def signup(request):
     if request.method == 'POST':  # If the form has been submitted...
@@ -70,6 +73,10 @@ def crear_juego(request):
         print("NO POST")
     
     return render_to_response('crear-post.html',  context)
-def ver_post(request):
+
+
+def verjuego(request,id_post):
     context = RequestContext(request)
-    return render_to_response('AbzuGames.html',  context)
+    mi_juego = Juego.objects.get(id = id_post)
+    return render_to_response('ver-post.html',{'post':mi_juego},
+context)
