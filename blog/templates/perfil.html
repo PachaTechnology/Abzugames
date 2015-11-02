@@ -25,6 +25,7 @@
     <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link rel="icon" type="image/png" href="{% static 'img/logo.png'%}" />
+   
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -100,7 +101,6 @@
                   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent; border-color: transparent; padding: 13px 11px;">{{ user.username }}
                   <span class="caret"></span></button>
                   <ul class="dropdown-menu">
-                      <li><a class="page-scroll" href="{% url 'app_blog:perfil'%}">Perfil</a></li>
                     <li><a class="page-scroll" href="{% url 'app_blog:crear_juego'%}">Crear Post</a></li>  
                     <li><a class="page-scroll" href="{% url 'app_blog:logout'%}">Cerrar Sesion</a></li>
                   </ul>
@@ -114,107 +114,58 @@
         <!-- /.container -->
     </nav>
 
+
+
     <!-- Intro Header -->
-    <header class="intro">
-        <div class="intro-body">
-            <div class="container">
+<header >
+        
+   <div class="container">
+    <div class="row" style="padding-top:30px; ">
+        <div class="col-xs-12 col-sm-6 col-md-6" style="margin-left: 140px; margin-top: 155px; width: 900px;">
+            <div class="well well-sm" style="background-color: rgba(56, 27, 27, 0.2);border: 1px solid rgba(243, 231, 231, 0.07);">
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <br></br>                        <br></br>
-                        <br></br>                        <br></br>
-                        <br></br>                                                <br></br>
-                        <h1 class="brand-heading" style="border-color:black">Rate it</h1>
-                        <p class="intro-text">Gratis, responsable, un catalogo de juegos<br>Creado por PachaTecnology.</p>
-                        <a href="#portfolio" class="btn btn-circle page-scroll">
-                            <i class="fa fa-angle-double-down animated"></i>
-                        </a>
+                    
+                    <div class="col-sm-6 col-md-4" id="login">
+                        
+                        <img src="{{ user.userprofile.picture }}" alt="" class="img-responsive" />
+                        
+                    </div>
+                    <div class="col-sm-6 col-md-8">
+                        <h4>
+                            Bhaumik Patel {{ user.userprofile.picture }}</h4>
+                        <small style="display: block;line-height: 1.428571429; color: #999;"><cite title="Cordoba, ARG">Cordoba, ARG <i class="glyphicon glyphicon-map-marker">
+                        </i></cite></small>
+                        <p>
+                            <i class="glyphicon glyphicon-user" style="margin-bottom: 10px;margin-right: 10px; "></i>{{ user.first_name }} {{ user.last_name }} 
+                            <br />
+                            <i class="glyphicon glyphicon-envelope" style="margin-bottom: 10px;margin-right: 10px; "></i>{{ user.email }}
+                            <br />
+                            
+                            <i class="glyphicon glyphicon-globe" style="margin-bottom: 10px;margin-right: 10px; "></i><a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a>
+                            <br />
+                            <i class="glyphicon glyphicon-gift" style="margin-bottom: 10px;margin-right: 10px; "></i>June 02, 1988</p>
+                        <!-- Split button -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary">
+                                Social</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span><span class="sr-only">Social</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Twitter</a></li>
+                                <li><a href="https://plus.google.com/+Jquery2dotnet/posts">Google +</a></li>
+                                <li><a href="https://www.facebook.com/jquery2dotnet">Facebook</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Github</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
 
-    <!-- Portfolio Grid Section -->
-    <section id="portfolio" class="bg-light-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">----------------</h2>
-                    <h3 class="section-subheading">Juegos Destacados del Mes</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-star fa-3x"></i>
-                            
-                            </div>
-                        </div>
-                        <img src="{% static 'img/portfolio/cover6.png'%}"  alt=""  height="470" width="360">
-                    </a>
-                   
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="{% static 'img/portfolio/cover5.png'%}" height="470" width="360" alt="">
-                    </a>
-                   
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="{% static 'img/portfolio/cover4.png'%}" height="470" width="360" alt="">
-                    </a>
-                    
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="{% static 'img/portfolio/cover2.png'%}" height="470" width="360" alt="">
-                    </a>
-                    
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="{% static 'img/portfolio/cover3.png'%}" height="470" width="360" alt="">
-                    </a>
-                  
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="{% static 'img/portfolio/cover1.png'%}" height="470" width="360" alt="">
-                    </a>
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-
+</header>
+   
     <!-- Download Section -->
     <section id="download" class="content-section text-center">
         <div class="download-section">

@@ -70,7 +70,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'AbzuGames.wsgi.application'
-
+AUTH_PROFILE_MODULE = 'AbzuGames.UserProfile'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -101,9 +101,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/user2/abzugames/blog/static/'
+STATIC_ROOT = BASE_DIR+'/blog/static/'
 MEDIA_URL = '/imagendeljuego/'
-MEDIA_ROOT = '/home/user2/abzugames/imagendeljuego/'
+MEDIA_ROOT = BASE_DIR+'/imagendeljuego/'
 
 # Redirect when login is correct.
 LOGIN_REDIRECT_URL = "/home"

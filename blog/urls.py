@@ -11,5 +11,5 @@ urlpatterns = patterns('',
                        url(r'^logout$', logout, {'template_name': 'loguin.html', }, name="logout"),
                        url(r'^crear-post$', 'blog.views.crear_juego', name='crear_juego'),
                         url(r'^ver-juego$', 'blog.views.verjuego', name='ver-juego'),
-
+                       url(r'^perfil$', 'blog.views.perfil', name='perfil'),
                       )

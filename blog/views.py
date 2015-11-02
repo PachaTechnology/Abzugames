@@ -9,8 +9,8 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from forms import SignUpForm 
-from blog.models import Juego , Categoria
+from forms import SignUpForm , UserProfileForm
+from blog.models import Juego , Categoria , UserProfile 
 
 
 # Create your views here.
@@ -18,6 +18,10 @@ from blog.models import Juego , Categoria
 def home(request):
     context = RequestContext(request)
     return render_to_response('home.html',context)
+
+def perfil(request):
+    context = RequestContext(request)
+    return render_to_response('perfil.html',context)
 
 def explorarpost(request):
     context = RequestContext(request)
@@ -27,10 +31,14 @@ def explorarpost(request):
 context)
 
 def signup(request):
+    registered = False
+    
     if request.method == 'POST':  # If the form has been submitted...
-        form = SignUpForm(request.POST)  # A form bound to the POST data
-        if form.is_valid():  # All validation rules pass
-
+        form = SignUpForm(data=request.POST)  # A form bound to the POST data
+        profile_form = UserProfileForm(data=request.POST)
+        
+        if form.is_valid() and profile_form.is_valid():  # All validation rules pass
+            
             username = form.cleaned_data["username"]
             password = form.cleaned_data["password"]
             email = form.cleaned_data["email"]
@@ -40,29 +48,41 @@ def signup(request):
             user.first_name = first_name
             user.last_name = last_name
             user.save()
-            new_user = authenticate(username=request.POST['username'],
-                                    password=request.POST['password'])
-            login(request, new_user)
-            return HttpResponseRedirect(reverse('app_blog:home'))  # Redirect after POST
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            
+            if 'picture' in request.FILES:
+                profile.picture = request.FILES['picture']
+            profile.save()
+            registered = True
+        else:
+            print form.errors, profile_form.errors
+            print("no pasa nada")
+        new_user = authenticate(username=request.POST['username'],
+                                password=request.POST['password'])
+        login(request, new_user)
+        return HttpResponseRedirect(reverse('app_blog:home'))  # Redirect after POST
     else:
         form = SignUpForm()
+        profile_form = UserProfileForm()
  
     data = {
         'form': form,
+        'profile_form': profile_form,
+        'registered': registered,
     }
     return render_to_response('signup.html', data, context_instance=RequestContext(request))
+
 
 @requires_csrf_token
 def crear_juego(request):
     context = RequestContext(request)
     if request.method=='POST':
-        print("POSTTTT")
-        print(request.user.id)
-        print(request.POST.getlist(Categoria))
         game=Juego()
         game.titulo=request.POST['titulo']
         game.imagen=request.FILES['imagen']
         game.contenido=request.POST['contenido']
+        game.resumen= request.POST['contenido'][0:100] + "..."
         game.url=request.POST['url']
         #game.categoria=request.POST.getlist('categorias')
         game.desarrollador=request.POST['desarrollador']
@@ -80,3 +100,9 @@ def verjuego(request,id_post):
     mi_juego = Juego.objects.get(id = id_post)
     return render_to_response('ver-post.html',{'post':mi_juego},
 context)
+
+
+
+
+
+

@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Categoria(models.Model):
     nombre = models.CharField("Nombre de la Categoria", max_length=50)
     descripcion = models.TextField(u'Descripcion de la categoria')
@@ -16,10 +17,11 @@ class Juego(models.Model):
         verbose_name_plural = "Juegos"
         ordering=['-fechaDelPost']
 
-    imagen = models.FileField(u'Caratula de Juego', upload_to='imagendeljuego', default='null')
+    imagen = models.FileField(u'Caratula de Juego', upload_to='/imagendeljuego', default='null')
     titulo = models.CharField(u'Título', max_length=50)
     fechaDelPost = models.DateTimeField(u'Fecha del Post', auto_now_add=True)
     contenido = models.TextField(u'Contenido')
+    resumen = models.TextField(u'Resumen', default='')
     publicado = models.BooleanField(u'Publicado', default=True)
     autor = models.ForeignKey(User)
     #categoria = models.ManyToManyField(Categoria)
@@ -41,3 +43,12 @@ class Comentario(models.Model):
         
     def __str__(self):
         return self.nick, self.puntajeSegunComunidad
+    
+    
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    picture = models.ImageField(upload_to='imagendeljuego', blank=True)
+
+    def __unicode__(self):
+        return self.user.username
+    

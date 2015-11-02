@@ -71,7 +71,7 @@
                                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent; border-color: transparent; padding: 13px 11px;">{{ user.username }} <span class="caret"></span></button>
                                     <ul class="dropdown-menu">
                                         </li>
-
+                                    <li><a class="page-scroll" href="{% url 'app_blog:perfil'%}">Perfil</a></li>
                                     <li><a class="page-scroll" href="{% url 'app_blog:crear_juego'%}">Crear Post</a></li>
                                     <li><a class="page-scroll" href="{% url 'app_blog:logout'%}">Cerrar Sesion</a></li>
 
@@ -176,7 +176,7 @@
                                 <div class="col-md-5" style="margin-left:-295px; margin-top: 3px;">
                                     <h3>{{post.titulo}}</h3>
                                     <h4>{{post.fechaCreacion}}</h4>
-                                    <p>{{post.contenido}}</p>
+                                    <p>{{post.resumen}}</p>
                                     <a class="btn btn-primary" href="{% url 'app_blog:ver-juego' %}">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
                                 </div>
                             </div>
