@@ -170,14 +170,14 @@
                             
                                 
                                     <a href="#">
-                                    <img class="img-responsive" style="max-width: 50%;" src="{{ MEDIA_URL }}/imagendeljuego/{{post.imagen}}"  alt="">
+                                    <img class="img-responsive" style="max-width: 50%;" src="/imagendeljuego/{{post.imagen}}"  alt="">
                                     </a>
                                 </div>
                                 <div class="col-md-5" style="margin-left:-295px; margin-top: 3px;">
                                     <h3>{{post.titulo}}</h3>
                                     <h4>{{post.fechaCreacion}}</h4>
                                     <p>{{post.resumen}}</p>
-                                    <a class="btn btn-primary" href="{% url 'app_blog:ver-juego' %}">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                    <a class="btn btn-primary" href="{% url 'app_blog:ver_juego' post.id %}">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
                                 </div>
                             </div>
                             <!-- /.row -->

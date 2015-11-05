@@ -11,6 +11,8 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from forms import SignUpForm , UserProfileForm
 from blog.models import Juego , Categoria , UserProfile 
+from django.shortcuts import get_object_or_404
+
 
 
 # Create your views here.
@@ -85,6 +87,7 @@ def crear_juego(request):
         game.url=request.POST['url']
         #game.categoria=request.POST.getlist('categorias')
         game.desarrollador=request.POST['desarrollador']
+        game.plataformas = request.POST['plataformas']
         game.fechaCreacion=request.POST['fechaCreacion']
         game.autor = User.objects.get(id = request.user.id)
         game.save()
@@ -96,7 +99,10 @@ def crear_juego(request):
 
 def verjuego(request,id_post):
     context = RequestContext(request)
-    mi_juego = Juego.objects.get(id = id_post)
+    
+    juego = get_object_or_404(Juego, id =id_post)
+    mi_juego = Juego.objects.get(id =id_post)
+    print(id)
     return render_to_response('ver-post.html',{'post':mi_juego},
 context)
 

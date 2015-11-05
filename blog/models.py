@@ -17,7 +17,7 @@ class Juego(models.Model):
         verbose_name_plural = "Juegos"
         ordering=['-fechaDelPost']
 
-    imagen = models.FileField(u'Caratula de Juego', upload_to='imagendeljuego', blank=True)
+    imagen = models.FileField(u'Caratula de Juego', upload_to='imagenesPost', blank=True)
     titulo = models.CharField(u'Título', max_length=50)
     fechaDelPost = models.DateTimeField(u'Fecha del Post', auto_now_add=True)
     contenido = models.TextField(u'Contenido')
@@ -27,7 +27,8 @@ class Juego(models.Model):
     #categoria = models.ManyToManyField(Categoria)
     url = models.CharField(u'Link del Trailer', max_length=200)
     fechaCreacion = models.IntegerField(u'Año de Creacion')
-    desarrollador = models.TextField(u'Desarrollador')    
+    desarrollador = models.TextField(u'Desarrollador')
+    plataformas = models.TextField(u'Plataformas')
     
     def __str__(self):
         return self.titulo
@@ -47,8 +48,7 @@ class Comentario(models.Model):
     
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
-    
-    picture= models.FileField(u'Imagen de Perfil', upload_to='imagendeljuego', blank=True)
+    picture= models.FileField(u'Imagen de Perfil', upload_to='imgUser', blank=True)
 
     def __unicode__(self):
         return self.user.username
