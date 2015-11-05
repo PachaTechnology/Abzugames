@@ -50,10 +50,9 @@ def signup(request):
             user.save()
             profile = profile_form.save(commit=False)
             profile.user = user
-            
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
-            profile.save()
+                profile.save()
             registered = True
         else:
             print form.errors, profile_form.errors
