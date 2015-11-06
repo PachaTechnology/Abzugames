@@ -63,7 +63,7 @@
                         </li>
 
                         <li>
-                            
+
                             <div class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent; border-color: transparent; padding: 13px 11px;">{{ user.username }}
                                     <span class="caret"></span></button>
@@ -72,7 +72,7 @@
                                     <li><a class="page-scroll" href="{% url 'app_blog:logout'%}">Cerrar Sesion</a></li>
                                 </ul>
                             </div>
-                            
+
                         </li>
                     </ul>
                 </div>
@@ -80,124 +80,133 @@
             </div>
             <!-- /.container -->
         </nav>
-        
+
         <form  method="POST" role="form" class="form-signin" action="{% url 'app_blog:crear_juego'%}" style="margin-top: 103px;" enctype="multipart/form-data">
-{% csrf_token %}
+            {% csrf_token %}
             <div style="margin-left: 61px; margin-bottom: 67px;">
                 <h1 class="page-header">
                     Crear Post
                     <small>AbzuGames</small>
                 </h1>
             </div>
-                <div style="width: 422px; margin-left: 112px; margin-top: -46px;">
-                    <span>User: </span><span name="username" value="{{ user.username }}">{{ user.username }}</span>
-                    <input type="text" class="form-control" name="titulo" placeholder="Titulo del Juego" value="" style="margin-top: 16px; width: 241px;">
-                    <textarea type="text" class="form-control" rows="4" name="contenido" placeholder="Descripcion del Juego" style="margin-top: 14px;"></textarea>
-                    <input type="text" class="form-control" name="url" placeholder="Insertar URL (YouTube)" value="" style="margin-top: 7px;">
-                    <input type="int" class="form-control" name="fechaCreacion" placeholder="Año del Juego" style="margin-top: 7px;">
-                    <input type="text" class="form-control" name="desarrollador" placeholder="Desarrollador" style="margin-top: 7px;">
-                    <input type="text" class="form-control" name="plataformas" placeholder="Plataformas" style="margin-top: 7px;">
-                    <input type="file" id="imagen" name="imagen" style="margin-top: 7px;">
+            
+            
+            <div style="width: 422px; margin-left: 112px; margin-top: -15px;">
+                <span>User: </span><span name="username" value="{{ user.username }}">{{ user.username }}</span>
+                <input type="text" class="form-control" name="titulo" placeholder="Titulo del Juego" value="" style="margin-top: 16px; width: 967px;">
+                <textarea type="text" class="form-control" rows="4" name="contenido" placeholder="Descripcion del Juego" style="margin-top: 14px; width: 967px;"></textarea>
+                <input type="text" class="form-control" name="url" placeholder="Insertar URL (YouTube)" value="" style="margin-top: 14px; width: 967px;">
+                <input type="int" class="form-control" name="fechaCreacion" placeholder="Año del Juego" style="margin-top: 14px;">
+                <input type="text" class="form-control" name="desarrollador" placeholder="Desarrollador" style="margin-top: 14px;">
 
-                   <!-- Search box Start -->
-<form>
-    <div  style="margin-top: 20px;">
-        <div class="btn-group"> <a class="btn btn-default dropdown-toggle btn-select" data-toggle="dropdown" href="#">Categoría <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li><a href="#">Aventuras</a></li>
-                <li><a href="#">Conducción</a></li>
-                <li><a href="#">Deportes</a></li>
-                <li><a href="#">Rol</a></li>
-                <li><a href="#">Shooter</a></li>
-                <li><a href="#">Estrategia</a></li>
-                <li><a href="#">Simuladores</a></li>
-                <li><a href="#">Otros</a></li>
-                <li class="divider"></li>
-            </ul>
-        </div>
-        <div class="btn-group" style="margin-left: 9px;"> <a class="btn btn-default dropdown-toggle btn-select2" data-toggle="dropdown" href="#">Plataforma <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li><a href="#">PC</a></li>
-                <li><a href="#">PS3</a></li>
-                <li><a href="#">PS4</a></li>
-                <li><a href="#">XBOX 360</a></li>
-                <li><a href="#">XBOX ONE</a></li>
-                <li><a href="#">OTRA</a></li>
-            </ul>
-        </div>
-    </div>
-</form>
-<!-- Search box End -->
+                <input type="file" id="imagen" name="imagen" style="margin-top: 14px;">
+
+                <!-- Search box Start -->
+
+                <div  style="margin-top: -120px; margin-left: 451px;">
+                    <div class="btn-group"> <a class="btn btn-default dropdown-toggle btn-select" data-toggle="dropdown" style="margin-left: 155px" href="#">Categoría  <span class="caret"></span></a>
+                        <ul class="dropdown-menu" style="margin-left: 155px; margin-top:    5px;">
+                            <li><a href="#">Aventuras</a></li>
+                            <li><a href="#">Conducción</a></li>
+                            <li><a href="#">Deportes</a></li>
+                            <li><a href="#">Rol</a></li>
+                            <li><a href="#">Shooter</a></li>
+                            <li><a href="#">Estrategia</a></li>
+                            <li><a href="#">Simuladores</a></li>
+                            <li><a href="#">Otros</a></li>
+                            <li class="divider"></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group" style="margin-left: 9px;"> <a class="btn btn-default dropdown-toggle btn-select" data-toggle="dropdown" style="margin-top: -45px;" href="#">Plataforma <span class="caret"></span></a>
+                        <ul class="dropdown-menu" style="margin-left: 1px; margin-top: -5px;">
+                            <li><a href="#">PC</a></li>
+                            <li><a href="#">PS3</a></li>
+                            <li><a href="#">PS4</a></li>
+                            <li><a href="#">XBOX 360</a></li>
+                            <li><a href="#">XBOX ONE</a></li>
+                            <li><a href="#">OTRA</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Search box End -->
             </div>
 
-<!--<a id="boton" type="submit" class="btn btn-lg btn-primary btn-block">Crear Post</a>-->
-<input type="submit" class="btn btn-lg btn-primary btn-block" value="Crear Post " style="width: 13%; margin-left: 874px;"/> 
-<!--<button type="submit" class="btn btn-lg btn-primary btn-block" value="Crear Post" style="width: 127px;"></button>-->
-<!--                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Crear Post" style="width: 127px;"/>-->
-           </div>
+            <!--<a id="boton" type="submit" class="btn btn-lg btn-primary btn-block">Crear Post</a>-->
+            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Crear Post " style="width: 16%; margin-left: 859px; margin-top: -54px; height: 77px;"/> 
+            <!--<button type="submit" class="btn btn-lg btn-primary btn-block" value="Crear Post" style="width: 127px;"></button>-->
+            <!--                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Crear Post" style="width: 127px;"/>-->
+            </div>
         </form>
 
 
 
 
-        <!-- Download Section -->
-        <section id="download" class="content-section text-center">
-            <div class="download-section">
-                <div class="container">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <h2>Contacto PachaTecnology</h2>
-                        <p>Feel free to email us to provide some feedback on our templates, give us suggestions for new templates and themes, or to just say hello!</p>
-                        <ul class="list-inline banner-social-buttons">
-                            <li>
-                                <a href="" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
-                            </li>
-                            <li>
-                                <a href="" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
-                            </li>
-                            <li>
-                                <a href="" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
-                            </li>
-                        </ul>
-                    </div>
+    <!-- Download Section -->
+    <section id="download" class="content-section text-center">
+        <div class="download-section">
+            <div class="container">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h2>Contacto PachaTecnology</h2>
+                    <p>Feel free to email us to provide some feedback on our templates, give us suggestions for new templates and themes, or to just say hello!</p>
+                    <ul class="list-inline banner-social-buttons">
+                        <li>
+                            <a href="" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                        </li>
+                        <li>
+                            <a href="" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                        </li>
+                        <li>
+                            <a href="" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="container content-section text-center">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <h2></h2>
-                    <p></p>
-                    </p>
-
-            </div>
-            </div>
-        </section>
-
-
-    <!-- Footer -->
-    <footer>
-        <div class="container text-center">
-            <p>Copyright &copy; Our Website 2015</p>
         </div>
-    </footer>
+    </section>
 
-    <!-- jQuery -->
-    <script src="{% static 'js/jquery.js'%}"></script>
+    <!-- Contact Section -->
+    <section id="contact" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2></h2>
+                <p></p>
+                </p>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+        </div>
+        </div>
+    </section>
 
-    <!-- Plugin JavaScript -->
-    <script src="{% static 'js/jquery.easing.min.js'%}"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="{% static 'js/grayscale.js'%}"></script>
-    <script>
-//        $("#boton").click(alert("pato"));
-    </script>
-    </body>
+<!-- Footer -->
+<footer>
+    <div class="container text-center">
+        <p>Copyright &copy; Our Website 2015</p>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="{% static 'js/jquery.js'%}"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="{% static 'js/bootstrap.min.js'%}"></script>
+
+<!-- Plugin JavaScript -->
+<script src="{% static 'js/jquery.easing.min.js'%}"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="{% static 'js/grayscale.js'%}"></script>
+
+<script>
+    $(".dropdown-menu li a").click(function(){
+        var selText = $(this).text();
+        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+'<span class="caret"></span>');
+    });
+</script>
+<script>
+    //        $("#boton").click(alert("pato"));
+</script>
+</body>
 
 </html>
 
@@ -206,9 +215,9 @@
 
 {% endblock %}
 {% else %} 
-  
+
 
 <meta id="contenedor" http-equiv="Refresh" content="4 url={% url 'app_blog:login' %}" >
 <p>Permiso Denegado.</p>
-   <p> Sera redireccionado al Inicio de Sesión en 5 segundos. </p> 
+<p> Sera redireccionado al Inicio de Sesión en 5 segundos. </p> 
 {% endif %}
