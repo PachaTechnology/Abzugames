@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from forms import SignUpForm , UserProfileForm
-from blog.models import Juego , Categoria , UserProfile 
+from blog.models import Juego , Categoria , UserProfile , Comentario
 from django.shortcuts import get_object_or_404
 
 
@@ -92,22 +92,46 @@ def crear_juego(request):
         game.autor = User.objects.get(id = request.user.id)
         game.save()
     else:
-        print("NO POST")
+        print("NO POSTea")
     
     return render_to_response('crear-post.html',  context)
 
 
 def verjuego(request,id_post):
     context = RequestContext(request)
-    
     juego = get_object_or_404(Juego, id =id_post)
     mi_juego = Juego.objects.get(id =id_post)
-    print(id)
-    return render_to_response('ver-post.html',{'post':mi_juego},
-context)
+    if request.method=="POST":  
+        print("POST")
+        asunto = request.POST["asunto"]
+        autorComen = request.POST["autorComen"]
+        contenido = request.POST["mensaje"]
+        comentario=Comentario()
+        comentario.autorComen = autorComen
+        comentario.mensaje = mensaje
+        comentario.post = mi_juego
+        comentario.save()
+    else:
+        print("NO POST")
+    comentarios = Comentario.objects.filter(id=id_post)
+    return render_to_response('ver-post.html',{'post':mi_juego, 'comentarios':comentarios},context)
 
-
-
-
-
+def enviar_comentario(request):
+    context = RequestContext(request)
+    if request.method=="POST":
+        asunto = request.POST["asunto"]
+        autorComen = request.POST["autorComen"]
+        contenido = request.POST["mensaje"]
+        juego = get_object_or_404(Juego, id =id_post)
+        mi_juego = Juego.objects.get(id =id_post)
+        comentario=Comentario()
+        comentario.autorComen = autorComen
+        comentario.asunto = asunto
+        comentario.mensaje = mensaje
+        comentario.post = mi_juego
+        comentario.save()
+    comentarios = Comentario.objects.filter(post=request.POST['id'])    
+    return render_to_response('comentario.html', 
+                              {'comentarios':comentarios},
+                              context)
 

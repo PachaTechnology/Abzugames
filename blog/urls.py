@@ -12,4 +12,5 @@ urlpatterns = patterns('',
                        url(r'^crear-post$', 'blog.views.crear_juego', name='crear_juego'),
                         url(r'^ver-juego/(?P<id_post>[0-9]+)/$', 'blog.views.verjuego', name='ver_juego'),
                        url(r'^perfil$', 'blog.views.perfil', name='perfil'),
+                       url(r'^enviar_comentario/$', 'blog.views.enviar_comentario', name='enviar_comentario'),
                       )

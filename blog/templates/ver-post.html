@@ -183,15 +183,44 @@
                 <!-- Blog Comments -->
 
                 <!-- Comments Form -->
-                <div class="well">
-                    <h4>Leave a Comment:</h4>
-                    <form role="form">
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <h3 class="section-heading">Comentarios</h3>
+        {% csrf_token %} 
+         <div class="row control-group">
+             
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                        <label>Asunto</label>
+                        <input name="asunto" type="text" class="form-control" placeholder="Nombre" id="asunto" >
+                        <p class="help-block text-danger"></p>
+                    </div>
                 </div>
+                <div class="row control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                        <label>Nombre</label>
+                        <input name="autorComen" type="text" class="form-control" placeholder="Nombre" id="name" >
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                        <label>Mensaje</label>
+                        <textarea name="mensaje" rows="5" class="form-control" placeholder="Mensaje" id="message" ></textarea>
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                       
+                        <input type="submit" value="Enviar Comentario" id="send_ajax" name="comentarios" class="btn btn-primary">
+        
+                    </div>
+                </div>
+
+            </div>
+            
+</div>
 
                 <hr>
 
@@ -203,10 +232,8 @@
                         <img class="media-object" src="http://placehold.it/64x64" alt="">
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                        <h4 class="media-heading">
+                            {% include "comentario.html" %}
                     </div>
                 </div>
 
@@ -321,6 +348,38 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="{% static 'js/grayscale.js'%}"></script>
+    
+    <script>
+$("#send_ajax").click(function(){    
+        var dataFsend={
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            id:'{{post.id}}',
+            autorComen:$('#name').val(),
+            mensaje:$('#message').val(),
+            asunto:$('#asunto').val(),
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "{% url 'app_blog:enviar_comentario' %}",
+            data: dataFsend,
+            success: function(result){
+                $("#comentarios").html(result);
+            },
+            error: function(err){
+                console.log("ERRRORRRR");
+                console.log(err.responseText);
+
+
+            },
+        });
+    });
+</script>
+
+    
+
+
+
 
 </body>
 
@@ -330,3 +389,9 @@
  
  
 {% endblock %}
+
+
+
+
+
+

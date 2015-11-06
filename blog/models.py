@@ -4,12 +4,18 @@ from django.contrib.auth.models import User
 
 
 class Categoria(models.Model):
-    nombre = models.CharField("Nombre de la Categoria", max_length=50)
-    descripcion = models.TextField(u'Descripcion de la categoria')
+    nombreDeCategoria = models.CharField("Nombre de la Categoria", max_length=50)
+    descripcionDeCategoria = models.TextField(u'Descripcion de la Categoria')
 
     def __str__(self):
-        return self.nombre
+        return self.nombreDeCategoria
 
+class Plataforma(models.Model):
+    nombreDePlataforma = models.CharField("Nombre de la Plataforma", max_length=50)
+    descripcionDePlataforma = models.TextField(u'Descripcion de la Plataforma')
+
+    def __str__(self):
+        return self.nombreDePlataforma  
     
 class Juego(models.Model):
     class Meta:
@@ -24,26 +30,14 @@ class Juego(models.Model):
     resumen = models.TextField(u'Resumen', default='')
     publicado = models.BooleanField(u'Publicado', default=True)
     autor = models.ForeignKey(User)
-    #categoria = models.ManyToManyField(Categoria)
+    categoria = models.ManyToManyField(u'Categoria')
     url = models.CharField(u'Link del Trailer', max_length=200)
     fechaCreacion = models.IntegerField(u'Año de Creacion')
     desarrollador = models.TextField(u'Desarrollador')
-    plataformas = models.TextField(u'Plataformas')
+    plataforma = models.ManyToManyField(u'Plataforma')
     
     def __str__(self):
         return self.titulo
-
-class Comentario(models.Model):
-    class Meta:
-        ordering=['fecha']
-    post = models.ForeignKey(Juego)
-    nick = models.CharField('publicado por:', max_length=50)
-    contenido = models.TextField('Comentario', max_length=500)
-    fecha = models.DateTimeField('Fecha', auto_now_add=True)
-    puntajeSegunComunidad = models.IntegerField(u'puntajeSegunComunidad')    
-        
-    def __str__(self):
-        return self.nick, self.puntajeSegunComunidad
     
     
 class UserProfile(models.Model):
@@ -52,5 +46,21 @@ class UserProfile(models.Model):
 
     def __unicode__(self):
         return self.user.username
+
+class Comentario(models.Model):
+    class Meta:
+        verbose_name = "Comentario"
+        verbose_name_plural = "Todos los Comentarios"
+        ordering=['-fecha']
+    asunto =  models.TextField(u'Asunto')   
+    autorComen = models.ForeignKey(User)    
+    mensaje = models.TextField(u'Mensaje')
+    #publicado = models.BooleanField(u'Publicado?', default=True)
+    fecha = models.DateTimeField(u'Fecha del Mensaje', auto_now_add=True)
+    #publicado_in = models.ForeignKey(Juego, null=True)
     
+    
+    def __str__(self):
+        return self.mensaje
+
    
