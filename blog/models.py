@@ -58,9 +58,10 @@ class Comentario(models.Model):
     #publicado = models.BooleanField(u'Publicado?', default=True)
     fecha = models.DateTimeField(u'Fecha del Mensaje', auto_now_add=True)
     #publicado_in = models.ForeignKey(Juego, null=True)
+    post = models.ForeignKey(Juego)
     
     
     def __str__(self):
-        return self.mensaje
+        return self.asunto
 
    

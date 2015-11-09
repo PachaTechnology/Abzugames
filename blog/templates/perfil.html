@@ -70,7 +70,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll">
+                <a class="navbar-brand page-scroll" href="{% url 'app_blog:home'%}">
                     
                     <span class="light"><img src="{% static 'img/logo.png'%}"  height="25" width="25"></span> AbzuGames
                 </a>
@@ -154,7 +154,7 @@
                                 <li><a href="https://plus.google.com/+Jquery2dotnet/posts">Google +</a></li>
                                 <li><a href="https://www.facebook.com/jquery2dotnet">Facebook</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Github</a></li>
+                                <li><a href="{% url 'app_blog:editar_email' %}" class="list-group-item">Editar email</a></li>
                             </ul>
                         </div>
                     </div>

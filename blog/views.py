@@ -92,44 +92,49 @@ def crear_juego(request):
         game.autor = User.objects.get(id = request.user.id)
         game.save()
     else:
-        print("NO POSTea")
+        print("NO crear_juego")
     
     return render_to_response('crear-post.html',  context)
 
 
 def verjuego(request,id_post):
     context = RequestContext(request)
-    juego = get_object_or_404(Juego, id =id_post)
-    mi_juego = Juego.objects.get(id =id_post)
+    post = Juego.objects.get(id=id_post)
     if request.method=="POST":  
         print("POST")
         asunto = request.POST["asunto"]
         autorComen = request.POST["autorComen"]
         contenido = request.POST["mensaje"]
         comentario=Comentario()
+        juego = Juego.objects.get(id=id_post)
         comentario.autorComen = autorComen
         comentario.mensaje = mensaje
-        comentario.post = mi_juego
+        comentario.post = juego
         comentario.save()
     else:
-        print("NO POST")
-    comentarios = Comentario.objects.filter(id=id_post)
-    return render_to_response('ver-post.html',{'post':mi_juego, 'comentarios':comentarios},context)
+        print("NO verjuego")
+    comentarios = Comentario.objects.filter(post=id_post)
+    print(comentarios)
+    return render_to_response('ver-post.html',{'post':post, 'comentarios':comentarios},context)
 
 def enviar_comentario(request):
     context = RequestContext(request)
     if request.method=="POST":
+        print("POST1:"+str(request.POST))
+        print("POST2:"+str(request.POST.keys()))
         asunto = request.POST["asunto"]
         autorComen = request.POST["autorComen"]
-        contenido = request.POST["mensaje"]
-        juego = get_object_or_404(Juego, id =id_post)
-        mi_juego = Juego.objects.get(id =id_post)
+        mensaje=request.POST["mensaje"]
+        print(request.POST["id"])
+        juego = Juego.objects.get(id=request.POST["id"])
         comentario=Comentario()
-        comentario.autorComen = autorComen
+        comentario.autorComen = User.objects.get(id = request.user.id)
         comentario.asunto = asunto
         comentario.mensaje = mensaje
-        comentario.post = mi_juego
+        comentario.post = juego
         comentario.save()
+    else:
+        print("NO comentario")    
     comentarios = Comentario.objects.filter(post=request.POST['id'])    
     return render_to_response('comentario.html', 
                               {'comentarios':comentarios},
