@@ -35,6 +35,7 @@ class Juego(models.Model):
     fechaCreacion = models.IntegerField(u'Año de Creacion')
     desarrollador = models.TextField(u'Desarrollador')
     plataforma = models.ManyToManyField(u'Plataforma')
+    punt_media = models.DecimalField(u'Promedio', default=0, editable=False, max_digits=3, decimal_places=2)
     
     def __str__(self):
         return self.titulo
@@ -57,9 +58,9 @@ class Comentario(models.Model):
     mensaje = models.TextField(u'Mensaje')
     #publicado = models.BooleanField(u'Publicado?', default=True)
     fecha = models.DateTimeField(u'Fecha del Mensaje', auto_now_add=True)
-    #publicado_in = models.ForeignKey(Juego, null=True)
+    published_in = models.ForeignKey(Juego, null=True)
     post = models.ForeignKey(Juego)
-    
+    valoracion = models.IntegerField(u'Valoración', null=True)
     
     def __str__(self):
         return self.asunto

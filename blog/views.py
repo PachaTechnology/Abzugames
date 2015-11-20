@@ -12,6 +12,7 @@ from django.core.urlresolvers import reverse
 from forms import SignUpForm , UserProfileForm
 from blog.models import Juego , Categoria , UserProfile , Comentario
 from django.shortcuts import get_object_or_404
+from django.db.models import Avg
 
 
 
@@ -96,7 +97,7 @@ def crear_juego(request):
     
     return render_to_response('crear-post.html',  context)
 
-
+@requires_csrf_token
 def verjuego(request,id_post):
     context = RequestContext(request)
     post = Juego.objects.get(id=id_post)
@@ -115,10 +116,17 @@ def verjuego(request,id_post):
         print("NO verjuego")
     comentarios = Comentario.objects.filter(post=id_post)
     print(comentarios)
-    return render_to_response('ver-post.html',{'post':post, 'comentarios':comentarios},context)
+    res=Comentario.objects.filter(published_in=post).order_by('-fecha')
+    avgEs=res.aggregate(Avg('valoracion'))['valoracion__avg']
+    print(avgEs)
+    if avgEs!=None:
+        post.punt_media=avgEs
+        post.save()
+    return render_to_response('ver-post.html',{'post':post, 'comentarios':comentarios, 'avgEs':avgEs},context)
 
 def enviar_comentario(request):
     context = RequestContext(request)
+    valor = None 
     if request.method=="POST":
         print("POST1:"+str(request.POST))
         print("POST2:"+str(request.POST.keys()))
@@ -133,10 +141,11 @@ def enviar_comentario(request):
         comentario.mensaje = mensaje
         comentario.post = juego
         comentario.save()
+        valor=Comentario.objects.filter(published_in=juego).order_by('-fecha')
     else:
         print("NO comentario")    
     comentarios = Comentario.objects.filter(post=request.POST['id'])    
     return render_to_response('comentario.html', 
-                              {'comentarios':comentarios},
+                              {'comentarios':comentarios, 'valor':valor},
                               context)
 
