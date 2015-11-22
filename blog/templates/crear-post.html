@@ -101,36 +101,18 @@
 
                 <input type="file" id="imagen" name="imagen" style="margin-top: 14px;">
 
-                <!-- Search box Start -->
-
-                <div  style="margin-top: -120px; margin-left: 451px;">
-                    <div class="btn-group"> <a class="btn btn-default dropdown-toggle btn-select" data-toggle="dropdown" style="margin-left: 155px" href="#">Categoría  <span class="caret"></span></a>
-                        <ul class="dropdown-menu" style="margin-left: 155px; margin-top:    5px;">
-                            <li><a href="#">Aventuras</a></li>
-                            <li><a href="#">Conducción</a></li>
-                            <li><a href="#">Deportes</a></li>
-                            <li><a href="#">Rol</a></li>
-                            <li><a href="#">Shooter</a></li>
-                            <li><a href="#">Estrategia</a></li>
-                            <li><a href="#">Simuladores</a></li>
-                            <li><a href="#">Otros</a></li>
-                            <li class="divider"></li>
-                        </ul>
-                    </div>
-                    <div class="btn-group" style="margin-left: 9px;"> <a class="btn btn-default dropdown-toggle btn-select" data-toggle="dropdown" style="margin-top: -45px;" href="#">Plataforma <span class="caret"></span></a>
-                        <ul class="dropdown-menu" style="margin-left: 1px; margin-top: -5px;">
-                            <li><a href="#">PC</a></li>
-                            <li><a href="#">PS3</a></li>
-                            <li><a href="#">PS4</a></li>
-                            <li><a href="#">XBOX 360</a></li>
-                            <li><a href="#">XBOX ONE</a></li>
-                            <li><a href="#">OTRA</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Search box End -->
-            </div>
+                {% for i in cat %}
+            <div class="checkbox">
+               
+            <label><input type="checkbox" name="cat" value="{{i.id}}">{{i.nombreDeCategoria}}</label>
+                {% endfor %}
+</div>
+           {% for i in plat %}
+            <div class="checkbox">
+               
+            <label><input type="checkbox" name="plat" value="{{i.id}}">{{i.nombreDePlataforma}}</label>
+                {% endfor %}
+</div>
 
             <!--<a id="boton" type="submit" class="btn btn-lg btn-primary btn-block">Crear Post</a>-->
             <input type="submit" class="btn btn-lg btn-primary btn-block" value="Crear Post " style="width: 16%; margin-left: 859px; margin-top: -54px; height: 77px;"/> 
@@ -203,9 +185,7 @@
         $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+'<span class="caret"></span>');
     });
 </script>
-<script>
-    //        $("#boton").click(alert("pato"));
-</script>
+
 </body>
 
 </html>

@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from forms import SignUpForm , UserProfileForm
-from blog.models import Juego , Categoria , UserProfile , Comentario
+from blog.models import Juego , Categoria , UserProfile , Comentario, Plataforma
 from django.shortcuts import get_object_or_404
 from django.db.models import Avg
 
@@ -79,6 +79,8 @@ def signup(request):
 @requires_csrf_token
 def crear_juego(request):
     context = RequestContext(request)
+    plat = Plataforma.objects.all()
+    cat = Categoria.objects.all()
     if request.method=='POST':
         game=Juego()
         game.titulo=request.POST['titulo']
@@ -86,16 +88,21 @@ def crear_juego(request):
         game.contenido=request.POST['contenido']
         game.resumen= request.POST['contenido'][0:100] + "..."
         game.url=request.POST['url']
-        #game.categoria=request.POST.getlist('categorias')
         game.desarrollador=request.POST['desarrollador']
-        game.plataformas = request.POST['plataformas']
         game.fechaCreacion=request.POST['fechaCreacion']
         game.autor = User.objects.get(id = request.user.id)
         game.save()
+        array_cat= request.POST.getlist('cat')
+        array_plat= request.POST.getlist('plat')
+        for i in array_cat:
+            aux = Categoria.objects.get(id = i)
+            game.categoria.add(aux)
+        for i in array_plat: 
+            game.plataforma.add(i)
     else:
         print("NO crear_juego")
     
-    return render_to_response('crear-post.html',  context)
+    return render_to_response('crear-post.html',{'cat':cat, 'plat':plat},  context)
 
 @requires_csrf_token
 def verjuego(request,id_post):
@@ -116,7 +123,7 @@ def verjuego(request,id_post):
         print("NO verjuego")
     comentarios = Comentario.objects.filter(post=id_post)
     print(comentarios)
-    res=Comentario.objects.filter(published_in=post).order_by('-fecha')
+    res=Comentario.objects.filter(post=post).order_by('-fecha')
     avgEs=res.aggregate(Avg('valoracion'))['valoracion__avg']
     print(avgEs)
     if avgEs!=None:

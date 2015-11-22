@@ -58,7 +58,7 @@ class Comentario(models.Model):
     mensaje = models.TextField(u'Mensaje')
     #publicado = models.BooleanField(u'Publicado?', default=True)
     fecha = models.DateTimeField(u'Fecha del Mensaje', auto_now_add=True)
-    published_in = models.ForeignKey(Juego, null=True)
+    #published_in = models.ForeignKey(Juego, null=True)
     post = models.ForeignKey(Juego)
     valoracion = models.IntegerField(u'Valoración', null=True)
     

@@ -28,41 +28,6 @@
 
     <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" style= "margin-top: 108px;">
 
-        <!--  <table>
-<tr>
-<td>{{ user.username.label_tag }}</td>
-<td>{{ user.username }}</td>
-</tr>
-
-<tr>
-<td>{{ user.email.label_tag }}</td>
-<td>{{ user.email }}</td>
-</tr>
-
-<tr>
-<td>{{ user.first_name.label_tag }}</td>
-<td>{{ user.first_name }}</td>
-</tr>
-
-<tr>
-<td>{{ user.last_name.label_tag }}</td>
-<td>{{ user.last_name }}</td>
-</tr>
-
-<tr>
-<td>{{ user.date_joined.label_tag }}</td>
-<td>{{ user.date_joined }}</td>
-</tr>
-
-<tr>
-<td>{{ user.last_login.label_tag }}</td>
-<td>{{ user.last_login }}</td>
-</tr>
-
-</table>
--->
-        <!-- Navigation -->
-
         <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 
             <div class="container">
@@ -139,28 +104,31 @@
                         <div class="col-md-5">
                             <h2>{{post.titulo}}</h2>
 
-                            {% csrf_token %}
-                            <div class="tooltipped" data-position="top" data-delay="50" data-tooltip="Puntuación {{avgEs}}">
-                                {% for j in '12345' %}
+                        {% csrf_token %}
+                        <div class="tooltipped" data-position="top" data-delay="50" data-tooltip="Puntuación {{avgEs}}">
+                            {% for j in '12345' %}
                                 {% if j|add:"0" <= avgEs %}
-                                                       <span class="fa fa-star fa-2x" data-rating="{{j}}"></span>
-                            {% else %}
-                            {% if j|add:"0" < avgEs %}
-                                                   <span class="fa fa-star fa-2x" data-rating="{{j}}"></span>
-                        {% else %}
+                                           <span class="fa fa-star fa-2x" data-rating="{{j}}"></span>
+                                {% else %}
+                                    {% if j|add:"0" < avgEs %}
+                                           <span class="fa fa-star fa-2x" data-rating="{{j}}"></span>
+                                    {% else %}
                         <span class="fa fa-star-o fa-2x" data-rating="{{j}}"></span>
-                        {% endif %}
-                        {% endif %}
-                        {% endfor %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
                     </div>
                     <br>
 
                     <h5>{{post.fechaCreacion}}</h5>
 
                     <h4>Categoria</h4>
-                    <h4>{{post.plataformas}}</h4>
-
-                    <h4>{{post.desarollador}}</h4>
+                    {% for i in post.categoria.values %}
+                        <h4>{{i.nombreDeCategoria}}</h4>
+                        {% endfor %}
+                        {% for i in post.plataforma.values %}
+                        <h4>{{i.nombreDePlataforma}}</h4>
+                        {% endfor %}
                 </div>
             </div>
 
@@ -415,14 +383,4 @@
 </body>
 
 </html>
-
-
-
-
 {% endblock %}
-
-
-
-
-
-
