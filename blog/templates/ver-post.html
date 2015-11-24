@@ -167,18 +167,22 @@
 <h5> {{post.fechaDelPost}}</h5>
 
 <hr>
+{% if user.is_staff or post.autor == user.username %}
+	    <a href="{% url 'app_blog:deletePost' post.id %}" name="btn_delete_{{post.id}}" id="btn_delete_{{post.id}}"><i class="fa " style="margin-right:1%"></i>Eliminar</a>
+        {% endif %}
 
-<!-- Blog Comments -->
 
-<!-- Comments Form -->
+
 {% if user.is_authenticated %}
 <div class="row" style="margin-left: -209px; margin-right: -204px;">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" style="margin-left: 193px;">
         <h1 style="margin-left: 448px;">Rate It!</h1>
 
-        <div style="margin-left: 430px;">
-
-            <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" data-icon-lib="fa" data-active-icon="fa-star fa-3x" data-inactive-icon="fa-star-o fa-3x" data-clearable-icon="fa-trash-o"/>
+        <div class="star_rating" style="margin-left: 450px;">
+            {% for j in '12345' %}
+                <span class="fa fa-star-o fa-2x" data-rating="{{j}}"></span>
+            {% endfor %}
+			 <input type="hidden" name="whatever" class="rating-value" value="0">
         </div>
 
         <br>
@@ -192,7 +196,7 @@
                 <input name="asunto" type="text" class="form-control" placeholder="Asunto" id="asunto"  style="width: 1123px;">
                 <p class="help-block text-danger"></p>
             </div>
-        </div>
+        </div>                                
 
 
 
@@ -207,7 +211,7 @@
         <div class="row">
             <div class="form-group col-xs-12">
 
-                <a style="width: 1123px;"type="submit" value="Enviar Comentario" id="send_ajax" name="send_ajax" class="btn btn-lg btn-primary btn-block" style="margin-top: -24px">ENVIAR</a>
+                <a style="width: 1123px;" type="submit" value="Enviar Comentario" id="send_ajax" name="send_ajax" class="btn btn-lg btn-primary btn-block" style="margin-top: -24px">ENVIAR</a>
 
             </div>
         </div>
@@ -323,7 +327,7 @@
 
 
 <script>
-    var star_rating = $('.star_rating .fa');
+   var star_rating = $('.star_rating .fa');
     var SetRatingStar = function() {
         return star_rating.each(function() {
             if (parseInt(star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
@@ -333,7 +337,7 @@
             }
         });
     };
-    star_rating.on('click', function() {
+    $('.star_rating .fa').on('click', function() {
         star_rating.siblings('input.rating-value').val($(this).data('rating'));
         return SetRatingStar();
     });
@@ -343,36 +347,58 @@
     $('#send_ajax').click(function() {
         {% if user.is_authenticated %}
         if(star_rating.siblings('input.rating-value').val()==0){
-            Bootstrap.toast('No ingresó su valoración', 2000)
+            /*Bootstrap.toast('No ingresó su valoración', 2000);*/
+            alert("Seleccione una puntuación con las estrellas");
         }
          else{
              var dataFsend={
                  csrfmiddlewaretoken: '{{ csrf_token }}',
                  id:'{{post.id}}',
-                 autorComen:$('#name').val(),
                  valoracion:star_rating.siblings('input.rating-value').val(),
                  mensaje:$('#message').val(),
                  asunto:$('#asunto').val(),
-             }
-
+             };
+             console.log(star_rating.siblings('input.rating-value').val());
              $.ajax({
                  type: "POST",
                  url: "{% url 'app_blog:enviar_comentario' %}",
                  data: dataFsend,
                  success: function(result){
                      $("#comentarios").html(result);
-                     $("#res").html(result);
-                     Bootstrap.toast('Valoración enviada con éxito', 2000)
+                     $("#res").html(result)
+                     $("#asunto").val("");
+                     $("#message").val("");
+                     /*Bootstrap.toast('Valoración enviada con éxito', 2000);*/
                  },
                  error: function(err){
                      console.log("ERRRORRRR");
                      console.log(err.responseText);
-                     Bootstrap.toast('Ingrese antes de dar su opinion', 2000);
+                     /*Bootstrap.toast('Ingrese antes de dar su opinion', 2000);*/
 
                  },
              });
+         }
          });
+        $("#btn_delete_{{post.id}}").click(function(){
+        var data={
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            id:'{{post.id}}',
         }
+        $.ajax({
+            type: "POST",
+            url: "{% url 'app_blog:home'%}",
+            data: data,
+            success: function(o) {
+            el = document.getElementById('c'+cdel.cid)
+            el.parentNode.removeChild(el);
+        },
+        failure: function(o) {
+            alert('error'+o);
+        },
+        });
+        
+        });
+        
 </script>
 
 
@@ -383,4 +409,5 @@
 </body>
 
 </html>
+{% endif %}
 {% endblock %}

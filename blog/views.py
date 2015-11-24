@@ -137,18 +137,26 @@ def enviar_comentario(request):
     if request.method=="POST":
         print("POST1:"+str(request.POST))
         print("POST2:"+str(request.POST.keys()))
-        asunto = request.POST["asunto"]
-        autorComen = request.POST["autorComen"]
-        mensaje=request.POST["mensaje"]
-        print(request.POST["id"])
-        juego = Juego.objects.get(id=request.POST["id"])
-        comentario=Comentario()
-        comentario.autorComen = User.objects.get(id = request.user.id)
-        comentario.asunto = asunto
-        comentario.mensaje = mensaje
-        comentario.post = juego
-        comentario.save()
-        valor=Comentario.objects.filter(published_in=juego).order_by('-fecha')
+        
+        comentarios = Comentario.objects.filter(post=request.POST['id'])
+        a=True
+        for i in comentarios:
+            if i.autorComen.id == request.user.id:
+                a=False
+        if a:
+            asunto = request.POST["asunto"]
+            #autorComen = request.POST["autorComen"]
+            mensaje=request.POST["mensaje"]
+            valoracion=request.POST["valoracion"]
+            juego = Juego.objects.get(id=request.POST["id"])
+            comentario=Comentario()
+            comentario.autorComen = User.objects.get(id = request.user.id)
+            comentario.asunto = asunto
+            comentario.valoracion = valoracion
+            comentario.mensaje = mensaje
+            comentario.post = juego
+            comentario.save()
+            valor=Comentario.objects.filter(post=juego).order_by('-fecha')
     else:
         print("NO comentario")    
     comentarios = Comentario.objects.filter(post=request.POST['id'])    
@@ -156,3 +164,16 @@ def enviar_comentario(request):
                               {'comentarios':comentarios, 'valor':valor},
                               context)
 
+def deletePost(request,id_post):
+    context = RequestContext(request)
+    juego = Juego.objects.get(id=id_post)    
+    juego.delete()
+    request.session.flush()
+    return render_to_response('home.html',context)
+
+def busqueda(request):
+    context = RequestContext(request)
+    buscar = request.POST['busqueda']
+    juegos = Juego.objects.filter(titulo__contains=buscar)
+    print juegos
+    return render(request,'consulta.html',{'juegos':juegos})

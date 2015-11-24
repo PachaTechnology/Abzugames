@@ -1,12 +1,16 @@
 {% for comentario in comentarios %}
-<div class="post-preview">
-    <h2 class="post-title">
-        {{comentario.autorComen}}
-    </h2>
-    <p class="post-meta">Comentado el {{comentario.fecha}}</p>
-    <h5 class="post-subtitle">
-        {{comentario.mensaje}}
-    </h5>
+<div class="post-preview" style="center-align">
+    <h2 >{{comentario.asunto}} {% for j in '12345' %}
+        {% if j|add:"0" <= comentario.valoracion %}
+                                               <span class="fa fa-star" data-rating="{{j}}"></span>        
+    {% else %}
+    <span class="fa fa-star-o" data-rating="{{j}}"></span>        
+    {% endif %}
+    {% endfor %}</h2>
+
+<h3 class="post-subtitle">{{comentario.mensaje}}</h3>
+<h5>Publicado por {{comentario.autorComen}}</h5>
+<h6>Comentado el {{comentario.fecha}}</h6>
 </div>
 <hr>
 {% endfor %}

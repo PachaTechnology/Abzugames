@@ -90,6 +90,15 @@
     <div style="height: 100px;">
 
     </div>
+<div class="busqueda">
+                            <form action="{% url 'app_blog:buscar' %}" method="POST">
+                                {% csrf_token %}
+                                <div style="margin-left: 104px;">
+                             <input class="form-control" type="text" class="search-query" name="busqueda" placeholder="Buscar" style="width: 295px; float: left; height: 44px;">
+                                <div class="btn-group">
+                                    <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-left: 8px; width: 55px; height: 45px;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                </div>
+                                    </div>
 
     <!-- Search box Start -->
     <form>

@@ -92,32 +92,36 @@
             
             
             <div style="width: 422px; margin-left: 112px; margin-top: -15px;">
-                <span>User: </span><span name="username" value="{{ user.username }}">{{ user.username }}</span>
+                <!-- Download Section <span>User: </span><span name="username" value="{{ user.username }}">{{ user.username }}</span>-->
                 <input type="text" class="form-control" name="titulo" placeholder="Titulo del Juego" value="" style="margin-top: 16px; width: 967px;">
                 <textarea type="text" class="form-control" rows="4" name="contenido" placeholder="Descripcion del Juego" style="margin-top: 14px; width: 967px;"></textarea>
                 <input type="text" class="form-control" name="url" placeholder="Insertar URL (YouTube)" value="" style="margin-top: 14px; width: 967px;">
                 <input type="int" class="form-control" name="fechaCreacion" placeholder="Año del Juego" style="margin-top: 14px;">
                 <input type="text" class="form-control" name="desarrollador" placeholder="Desarrollador" style="margin-top: 14px;">
 
-                <input type="file" id="imagen" name="imagen" style="margin-top: 14px;">
-
+                <h7 style="margin-top: 20px; width: 112px; float: left;">Imagen Portada: </h7><input type="file" id="imagen" name="imagen" style="margin-top: 14px;margin-left: 114px;">
+                <div >
+                <h4 style="margin: 22px 0px 17px;">Categoria</h4>
                 {% for i in cat %}
             <div class="checkbox">
+                
                
             <label><input type="checkbox" name="cat" value="{{i.id}}">{{i.nombreDeCategoria}}</label>
                 {% endfor %}
-</div>
+                    </div>
+                    
+            <h4 style="margin: 22px 0px 17px;">Plataforma</h4>    
            {% for i in plat %}
             <div class="checkbox">
                
             <label><input type="checkbox" name="plat" value="{{i.id}}">{{i.nombreDePlataforma}}</label>
                 {% endfor %}
+                
 </div>
+                </div>
 
-            <!--<a id="boton" type="submit" class="btn btn-lg btn-primary btn-block">Crear Post</a>-->
-            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Crear Post " style="width: 16%; margin-left: 859px; margin-top: -54px; height: 77px;"/> 
-            <!--<button type="submit" class="btn btn-lg btn-primary btn-block" value="Crear Post" style="width: 127px;"></button>-->
-            <!--                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Crear Post" style="width: 127px;"/>-->
+            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Crear Post "  style="width: 75%; margin-left: 654px; margin-top: -54px; height: 77px; float:left"/> 
+            
             </div>
         </form>
 

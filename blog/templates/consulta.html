@@ -58,7 +58,7 @@
                             </li>
                             {% endif %}
                             <li>
-                                <a class="page-scroll" href="#page-top">Explorar Juego</a>
+                                <a class="page-scroll" href="{% url 'app_blog:explorar-post'%}">Explorar Juego</a>
                             </li>
                             <li>
                                 <a class="page-scroll" href="#download">Contacto</a>
@@ -90,57 +90,11 @@
     <div style="height: 100px;">
 
     </div>
-
+    
     <!-- Search box Start -->
     <form>
         <div class="carousel-search hidden-sm" style="margin-left: 320px; margin-top: 2px;">
-            <div class="btn-group" style="margin-left: 8px;"> <a class="btn btn-default dropdown-toggle btn-select" data-toggle="dropdown" href="#">Plataforma <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">TODAS </a></li>
-                    <li><a href="#">PC </a></li>
-                    <li><a href="#">PS3 </a></li>
-                    <li><a href="#">PS4 </a></li>
-                    <li><a href="#">XBOX 360 </a></li>
-                    <li><a href="#">XBOX ONE </a></li>
-                    </div>
-
-                <div class="btn-group" style="margin-left: 8px;"> <a class="btn btn-default dropdown-toggle btn-select" data-toggle="dropdown" href="#">Categoria <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#"></a></li>
-                        <li><a href="#">AVENTURAS </a></li>
-                        <li><a href="#">CONDUCCION </a></li>
-                        <li><a href="#">DEPORTES </a></li>
-                        <li><a href="#">ROL </a></li>
-                        <li><a href="#">SHOOTER </a></li>
-                        <li><a href="#">ESTRATEGIA </a></li>
-                        <li><a href="#">SIMULADORES </a></li>
-                        <li><a href="#">OTROS </a></li>
-                        </div>
-
-                    <div class="btn-group" style="margin-left: 8px;"> <a class="btn btn-default dropdown-toggle btn-select" data-toggle="dropdown" href="#">Puntuacion <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">9+ </a></li>
-                            <li><a href="#">8+ </a></li>
-                            <li><a href="#">7+ </a></li>
-                            <li><a href="#">6+ </a></li>
-                            <li><a href="#">5+ </a></li>
-                            <li><a href="#">4+ </a></li>
-                            <li><a href="#">3+ </a></li>
-                            <li><a href="#">2+ </a></li>
-                            <li><a href="#">1+ </a></li>                            
-                            </div>
-
-                        <div class="btn-group" style="margin-left: 8px;"> <a class="btn btn-default dropdown-toggle btn-select" data-toggle="dropdown" href="#">Ordenar por <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">AÑO </a></li>
-                                <li><a href="#">PUNTUACION </a></li>
-                                <li><a href="#">ORDEN ALFABETICO </a></li>
-                                <li><a href="#">ULTIMOS SUBIDOS </a></li>
-                                </div>
-
-                            <div class="btn-group" style="margin-left: 8px;">
-                                <button type="button" id="btnSearch" class="btn btn-primary">Buscar</button>
-                            </div>
+            
                         </div>
                         </form>
                     
@@ -163,27 +117,29 @@
                             </div>
                             
 
-
-                            {% for post in posts %}
+                            {% if juegos %}
+                            {% for juego in juegos %}
+                            
                             <div class="row" style="margin-right:-15px; margin-left:-15px; margin-top:7px;">
                                 <div class="col-md-7">
                             
                                 
-                                    <a href="#">
-                                    <img class="img-responsive" style="max-width: 50%;" src="/imagendeljuego/{{post.imagen}}"  alt="">
+                                  <a href="#">
+                                    <img class="img-responsive" style="max-width: 50%;" src="/imagendeljuego/{{juego.imagen}}"  alt="">
                                     </a>
                                 </div>
                                 <div class="col-md-5" style="margin-left:-295px; margin-top: 3px;">
-                                    <h3>{{post.titulo}}</h3>
-                                    <h4>{{post.fechaCreacion}}</h4>
-                                    <p>{{post.resumen}}</p>
-                                    <a class="btn btn-primary" href="{% url 'app_blog:ver_juego' post.id %}">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                    <h3>{{juego.titulo}}</h3>
+                                    <h4>{{juego.fechaCreacion}}</h4>
+                                    <p>{{juego.resumen}}</p>
+                                    <a class="btn btn-primary" href="{% url 'app_blog:ver_juego' juego.id %}">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
                                 </div>
                             </div>
                             <!-- /.row -->
 
                             <hr>
                             {% endfor %}
+                        {% endif %}
 
                          
 
@@ -244,9 +200,17 @@
                                 </div>
                             </div>
                         </section>
-
-
-
+                         <div class="busqueda">
+                            <form action="{% url 'app_blog:buscar' %}" method="POST">
+                                {% csrf_token %}
+                             <input class="form-control" type="text" class="search-query" name="busqueda" placeholder="buscar">
+                                <div class="btn-group">
+                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Buscar<i class="icon-search"></i></button>
+                                </div>
+                             
+                             </form>
+               
+    
                         <hr>
 
                         <!-- Footer -->
@@ -280,6 +244,8 @@
                     $("#btnSearch").click(function(){
 	                alert($('.btn-select').text()+", "+$('.btn-select2').text());
 });
+                        
+   
                     </script>
                     </body>
 

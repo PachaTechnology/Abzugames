@@ -66,8 +66,10 @@
                         {% if user.is_authenticated %}
                 <div class="dropdown">
                   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent; border-color: transparent; padding: 13px 11px;">{{ user.username }}
+                <img src="/imagendeljuego/{{ user.userprofile.picture }}" class="img-circle" style="width: 25px; height: 25px;">
                   <span class="caret"></span></button>
                   <ul class="dropdown-menu">
+                      <li><a class="page-scroll" href="{% url 'app_blog:perfil'%}">Perfil</a></li>
                     <li><a class="page-scroll" href="{% url 'app_blog:crear_juego'%}">Crear Post</a></li>  
                     <li><a class="page-scroll" href="{% url 'app_blog:logout'%}">Cerrar Sesion</a></li>
                   </ul>
@@ -96,34 +98,27 @@
                         
                     </div>
                     <div class="col-sm-6 col-md-8">
-                        <h4>
-                            Información Basica </h4>
-                        <small style="display: block;line-height: 1.428571429; color: #999;"><cite title="Cordoba, ARG">Cordoba, ARG <i class="glyphicon glyphicon-map-marker">
-                        </i></cite></small>
+                        <br>
+                        <h3>Perfil </h3>
+
                         <p>
                             <i class="glyphicon glyphicon-user" style="margin-bottom: 10px;margin-right: 10px; "></i>{{ user.first_name }} {{ user.last_name }} 
                             <br />
                             <i class="glyphicon glyphicon-envelope" style="margin-bottom: 10px;margin-right: 10px; "></i>{{ user.email }}
                             <br />
-                            
-                            <i class="glyphicon glyphicon-globe" style="margin-bottom: 10px;margin-right: 10px; "></i><a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a>
-                            <br />
-                            <i class="glyphicon glyphicon-gift" style="margin-bottom: 10px;margin-right: 10px; "></i>June 02, 1988</p>
+
                         <!-- Split button -->
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary">
-                                Social</button>
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                <span class="caret"></span><span class="sr-only">Social</span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Twitter</a></li>
-                                <li><a href="https://plus.google.com/+Jquery2dotnet/posts">Google +</a></li>
-                                <li><a href="https://www.facebook.com/jquery2dotnet">Facebook</a></li>
-                                <li class="divider"></li>
-                                
+                            <ul class="list-inline banner-social-buttons">
+                                <li>
+                                    <a href="" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                                </li>
+                                <li>
+                                    <a href="" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                                </li>
+                                <li>
+                                    <a href="" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
+                                </li>
                             </ul>
-                        </div>
                     </div>
                 </div>
             </div>

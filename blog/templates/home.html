@@ -98,6 +98,7 @@
                         {% if user.is_authenticated %}
                 <div class="dropdown">
                   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent; border-color: transparent; padding: 13px 11px;">{{ user.username }}
+                <img src="/imagendeljuego/{{ user.userprofile.picture }}" class="img-circle" style="width: 25px; height: 25px;">
                   <span class="caret"></span></button>
                   <ul class="dropdown-menu">
                       <li><a class="page-scroll" href="{% url 'app_blog:perfil'%}">Perfil</a></li>
